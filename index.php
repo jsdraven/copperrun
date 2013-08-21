@@ -28,9 +28,19 @@ function listing ($filler){
     }
     return $filler_r;
 }
-function timeToSeconds ($time){
-
+function DbConnection($query){
+    $copperrun = mysql_connect('localhost', 'root', '');
+    mysql_selectdb('copperrun', $copperrun);
+    $result = mysql_query($query);
+    return $result;
 }
+function timeToSeconds ($time){
+    list($hours, $mins, $secs) = explode(':', $time);
+    $seconds = ($hours * 3600)+($mins * 60)+ $secs;
+    return $seconds;
+}
+
+
 if(isset($_POST['form'])){
     switch ($_POST['form']){
         case 1:
@@ -40,31 +50,27 @@ if(isset($_POST['form'])){
             $age = $_POST['age'];
             $bib = $_POST['bib'];
             $date = date("m/d/Y");
-            $copperrun = mysql_connect('localhost', 'root', '');
-            mysql_selectdb('copperrun', $copperrun);
-            mysql_query("INSERT INTO runners (FName, LName, Gender, Age, Bib, Date)
-                        VALUES ('$fname', '$lname', '$fm', '$age', '$bib', '$date')")or die("could not do it captain: ".mysql_error());
+            $query = "INSERT INTO runners (FName, LName, Gender, Age, Bib, Date)
+                        VALUES ('$fname', '$lname', '$fm', '$age', '$bib', '$date')";
+            DbConnection($query);
             break;
         case 2:
             $bib = $_POST['bib'];
             $time = $_POST['time'];
-            $copperrun = mysql_connect('localhost', 'root', '');
-            mysql_selectdb('copperrun', $copperrun);
-            mysql_query("UPDATE runners SET HalfMile = '$time' WHERE Bib = '$bib'")or die("could not do it captain: ".mysql_error());
+            $query = "UPDATE runners SET HalfMile = '$time' WHERE Bib = '$bib'";
+            DbConnection($query):
             break;
         case 3:
             $bib = $_POST['bib'];
             $time = $_POST['time'];
-            $copperrun = mysql_connect('localhost', 'root', '');
-            mysql_selectdb('copperrun', $copperrun);
-            mysql_query("UPDATE runners SET TwoMile = '$time' WHERE Bib = '$bib'")or die("could not do it captain: ".mysql_error());
+            $query = "UPDATE runners SET TwoMile = '$time' WHERE Bib = '$bib'";
+            DbConnection($query):
             break;
         case 4:
             $bib = $_POST['bib'];
             $time = $_POST['time'];
-            $copperrun = mysql_connect('localhost', 'root', '');
-            mysql_selectdb('copperrun', $copperrun);
-            mysql_query("UPDATE runners SET TenK = '$time' WHERE Bib = '$bib'")or die("could not do it captain: ".mysql_error());
+            $query = "UPDATE runners SET TenK = '$time' WHERE Bib = '$bib'";
+            DbConnection($query);
             break;
         case 5:
             $max = $_POST['maxAge'];
@@ -77,9 +83,8 @@ if(!isset($max)){
     $min = 1;
 }
 $date = date("m/d/Y");
-$copperrun = mysql_connect('localhost', 'root', '');
-mysql_selectdb('copperrun', $copperrun);
-$result = mysql_query("SELECT * FROM runners WHERE Age BETWEEN $min AND $max");
+$query = "SELECT * FROM runners WHERE Age BETWEEN $min AND $max";
+$result = DbConnection($query);
 
 
 
@@ -102,10 +107,13 @@ $tenk_m = array();
                 $halfmile_f[$key]['LName'] = $row['LName'];
                 $halfmile_f[$key]['Bib'] = $row['Bib'];
             }else{
-                $key = $row['HalfMile'];
+                $time = $row['HalfMile'];
+                $key = timeToSeconds($time);
                 $halfmile_m[$key]['FName'] = $row['FName'];
                 $halfmile_m[$key]['LName'] = $row['LName'];
                 $halfmile_m[$key]['Bib'] = $row['Bib'];
+                $halfmile_m[$key]['time'] = $time;
+
             }
 
         }
