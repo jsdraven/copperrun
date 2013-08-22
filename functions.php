@@ -1,4 +1,7 @@
 <?php
+if ($_SERVER['REQUEST_URI'] == '/copperrun/functions.php'){
+    die("Not allowed back here!");
+}
 /*
 **
 ** What we have here is a set of all functions. 
