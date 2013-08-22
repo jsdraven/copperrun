@@ -1,0 +1,19 @@
+ToDo List
+
+ (done) 1) Fix sorting of times cannot trust natural sort. may want to do a pop to end of array. 
+    (convert time stamp into seconds then sort seconds with natural sort. will need two functions, convert time to seconds and convert seconds to time readable)
+ 2) Set multiple tables for results. using config file params. AKA HDTV Output
+ ?what crack is this? 3) create a pre-emptive form for traking order of incoming bib numbers.
+
+4) create user's search system
+	a) We will accept first name last name and bib number. Only force at least one item any one of them.
+	b) land on a table of results unless there is only one to return then go strait to result.
+	c) result table will only list first name, and bib. Age and all other info will not be public
+	d) create mobile friendly info page.
+
+5) Live result tv feed.
+	a) page layout
+	b) build it so I could use a config file for age ranges and race type.
+
+6) build the input forms with more protection for noob assisted entries.
+

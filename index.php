@@ -3,42 +3,14 @@
 <?php
 /*
  Things to do...
- 1) Fix sorting of times cannot trust natural sort. may want to do a pop to end of array. 
-    (convert time stamp into seconds then sort seconds with natural sort. will need two functions, convert time to seconds and convert seconds to time readable)
- 2) Set multiple tables for results.
- 3) create a pre-emptive form for traking order of incoming bib numbers.
+
 
  ages
  1-5
  6-7
  
 */
-function listing ($filler){
-    $filler_r = '';
-    ksort($filler);
-    reset($filler);
-    $place = 1;
-    while (list($key, $val) = each($filler)){
-        $fname = $val['FName'];
-        $lname = $val['LName'];
-        $bib = $val['Bib'];
-        $time = $key;
-        $filler_r .= "<tr><td>$place</td><td>$fname</td><td>$lname</td><td>$bib</td><td>$time</td></tr>";
-        $place++;
-    }
-    return $filler_r;
-}
-function DbConnection($query){
-    $copperrun = mysql_connect('localhost', 'root', '');
-    mysql_selectdb('copperrun', $copperrun);
-    $result = mysql_query($query);
-    return $result;
-}
-function timeToSeconds ($time){
-    list($hours, $mins, $secs) = explode(':', $time);
-    $seconds = ($hours * 3600)+($mins * 60)+ $secs;
-    return $seconds;
-}
+require 'functions.php';
 
 
 if(isset($_POST['form'])){
@@ -58,13 +30,13 @@ if(isset($_POST['form'])){
             $bib = $_POST['bib'];
             $time = $_POST['time'];
             $query = "UPDATE runners SET HalfMile = '$time' WHERE Bib = '$bib'";
-            DbConnection($query):
+            DbConnection($query);
             break;
         case 3:
             $bib = $_POST['bib'];
             $time = $_POST['time'];
             $query = "UPDATE runners SET TwoMile = '$time' WHERE Bib = '$bib'";
-            DbConnection($query):
+            DbConnection($query);
             break;
         case 4:
             $bib = $_POST['bib'];
@@ -102,10 +74,12 @@ $tenk_m = array();
     while ($row = mysql_fetch_array($result)){
         if ($row['HalfMile'] > 0){
             if($row['Gender'] == 'F'){
-                $key = $row['HalfMile'];
+                $time = $row['HalfMile'];
+                $key = timeToSeconds($time);
                 $halfmile_f[$key]['FName'] = $row['FName'];
                 $halfmile_f[$key]['LName'] = $row['LName'];
                 $halfmile_f[$key]['Bib'] = $row['Bib'];
+                $halfmile_f[$key]['time'] = $time;
             }else{
                 $time = $row['HalfMile'];
                 $key = timeToSeconds($time);
@@ -120,30 +94,38 @@ $tenk_m = array();
         elseif($row['TwoMile'] > 0){
 
              if($row['Gender'] == 'F'){
-                $key = $row['TwoMile'];
+                $time = $row['TwoMile'];
+                $key = timeToSeconds($time);
                 $twomile_f[$key]['FName'] = $row['FName'];
                 $twomile_f[$key]['LName'] = $row['LName'];
                 $twomile_f[$key]['Bib'] = $row['Bib'];
+                $twomile_f[$key]['time'] = $time;
              }else{
-                $key = $row['TwoMile'];
+                $time = $row['TwoMile'];
+                $key = timeToSeconds($time);
                 $twomile_m[$key]['FName'] = $row['FName'];
                 $twomile_m[$key]['LName'] = $row['LName'];
                 $twomile_m[$key]['Bib'] = $row['Bib'];
+                $twomile_m[$key]['time'] = $time;
              }
 
         }
         elseif($row['TenK'] > 0){
 
             if($row['Gender'] == 'F'){
-                $key = $row['TenK'];
+                $time = $row['TenK'];
+                $key = timeToSeconds($time);
                 $tenk_f[$key]['FName'] = $row['FName'];
                 $tenk_f[$key]['LName'] = $row['LName'];
                 $tenk_f[$key]['Bib'] = $row['Bib'];
+                $tenk_f[$key]['time'] = $time;
             }else{
-                $key = $row['TenK'];
+                $time = $row['TenK'];
+                $key = timeToSeconds($time);
                 $tenk_m[$key]['FName'] = $row['FName'];
                 $tenk_m[$key]['LName'] = $row['LName'];
                 $tenk_m[$key]['Bib'] = $row['Bib'];
+                $tenk_m[$key]['time'] = $time;
             }
 
         }else{}
