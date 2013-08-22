@@ -1,15 +1,4 @@
-<html>
-
 <?php
-/*
- Things to do...
-
-
- ages
- 1-5
- 6-7
- 
-*/
 if ($_SERVER['REQUEST_URI'] == '/copperrun/runners.php'){
     die("Not allowed back here!");
 }

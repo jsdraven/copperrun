@@ -1,44 +1,26 @@
 <?php
+
+//var is set so to display credit on public sites.
 $programingCredit = "<h3>And programing is brought to you by Mother Lode Makers</h3>";
+
+//the page with the collection of functions so to be used globally if needed.
 require 'functions.php';
+
 if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
-	?>
-	<table border=1 >
-		<tr>
-			<td>
-				<form action='index.php' method='POST'>
-					<input type="submit" name='set'	value='runnerSearch' />
-					<input type="submit" name='set' value='runners' />
-					<input type="submit" name='set' value='tvFeed' />
-				</form>
-			</td>
-			<td>
-				<form action='index.php' method='POST'>
-					<!-- <input type='submit' name='reports' value='' /> !-->
-					<input type='submit' name='reports' value='missingRunners' />
-					<input type='submit' name='reports' value='twoMileResults' />
-					<input type='submit' name='reports' value='halfMileResults' />
-					<input type='submit' name='reports' value='tenKResults' />
-					<input type='submit' name='reports' value='editCatigories' />
-				</td>
-		</tr>
-	</table>
-
-
-	<?php
-	if (isset($_POST['set'])){
-		$choice = $_POST['set'].'.php';
-	}elseif (isset($_POST['reports'])){
-		$choice = 'reports.php';
-		$report = $_POST['reports'];
-	}else{
-		$choice = 'runners.php';
-	}
-	
+	//if it is the hosting computer they will be the only controlling admin with the panel giving them access to other features
+	require 'adminPanel.php';
 	require $choice;
 
+}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.10') {
+	//data entry IP is the only other computer with access to data entry not controlling at all
+	require 'runners.php';
+
+}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.15') {
+	//TV Feed only IP to the TV Feed. May open up to others later as another page options. Down side you cannot make it mobile friendly very easy.
+	require 'tvFeed.php';
+
 }else{
-	
+	//all other traffic is directed to the search form to look up racers results and stats.
 	require 'runnerSearch.php';
 	
 }

@@ -3,7 +3,7 @@ ToDo List
  (done) 1) Fix sorting of times cannot trust natural sort. may want to do a pop to end of array. 
     (convert time stamp into seconds then sort seconds with natural sort. will need two functions, convert time to seconds and convert seconds to time readable)
  2) Set multiple tables for results. using MySQL records, ID A.I. and year. I will need to generate form to remove bad records and add intended records. AKA HDTV Output
- ?what crack is this? 3) create a pre-emptive form for tracking order of incoming bib numbers.
+ ?what crack is this? 3) create a preemptive form for tracking order of incoming bib numbers.
 
 4) create user's search system
 	a) We will accept first name last name and bib number. Only force at least one item any one of them.
@@ -11,11 +11,12 @@ ToDo List
 	c) result table will only list first name, and bib. Age and all other info will not be public
 	d) create mobile friendly info page.
 
-5) Live result tv feed.
+5) Live result TV feed.
 	a) page layout
-	b) build it so I could use a config file for age ranges and race type.
-
+	b) build it so I could use a configuration file for age ranges and race type.
+ 
 6) build the input forms with more protection for noob assisted entries.
 
 7) build report methods for my use only.
 
+8) TV feed control options in the admin panel for what race set to show. Need to revise the admin panel so that there could be one controlling admin but two or more data entry.
