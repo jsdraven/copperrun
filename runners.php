@@ -60,7 +60,7 @@ $twomile_f = array();
 $twomile_m = array();
 $tenk_f = array();
 $tenk_m = array();
-
+print_r($result);
     while ($row = mysql_fetch_array($result)){
         if ($row['HalfMile'] > 0){
             if($row['Gender'] == 'F'){
