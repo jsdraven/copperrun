@@ -30,9 +30,9 @@ function listing ($filler){
     }
     return $filler_r;
 }
-function DbConnection($query){
+function DbConnection($query, $table){
     $copperrun = mysql_connect('localhost', 'root', 'root');
-    mysql_selectdb('copperrun', $copperrun);
+    mysql_selectdb($table, $copperrun);
     $result = mysql_query($query);
     return $result;
 }

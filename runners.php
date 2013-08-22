@@ -13,8 +13,6 @@
 if ($_SERVER['REQUEST_URI'] == '/copperrun/runners.php'){
     die("Not allowed back here!");
 }
-require 'functions.php';
-
 
 if(isset($_POST['form'])){
     switch ($_POST['form']){
@@ -27,25 +25,25 @@ if(isset($_POST['form'])){
             $date = date("m/d/Y");
             $query = "INSERT INTO runners (FName, LName, Gender, Age, Bib, Date)
                         VALUES ('$fname', '$lname', '$fm', '$age', '$bib', '$date')";
-            DbConnection($query);
+            DbConnection($query, 'runners');
             break;
         case 2:
             $bib = $_POST['bib'];
             $time = $_POST['time'];
             $query = "UPDATE runners SET HalfMile = '$time' WHERE Bib = '$bib'";
-            DbConnection($query);
+            DbConnection($query, 'runners');
             break;
         case 3:
             $bib = $_POST['bib'];
             $time = $_POST['time'];
             $query = "UPDATE runners SET TwoMile = '$time' WHERE Bib = '$bib'";
-            DbConnection($query);
+            DbConnection($query, 'runners');
             break;
         case 4:
             $bib = $_POST['bib'];
             $time = $_POST['time'];
             $query = "UPDATE runners SET TenK = '$time' WHERE Bib = '$bib'";
-            DbConnection($query);
+            DbConnection($query, 'runners');
             break;
         case 5:
             $max = $_POST['maxAge'];
@@ -59,7 +57,7 @@ if(!isset($max)){
 }
 $date = date("m/d/Y");
 $query = "SELECT * FROM runners WHERE Age BETWEEN $min AND $max";
-$result = DbConnection($query);
+$result = DbConnection($query, 'runners');
 
 
 
@@ -186,8 +184,9 @@ if (count($tenk_m)){
     $tenkr_m = '';
 }
 ?>
-<h1>Copper Run</h1>
+<h1>Copper Run Admin</h1>
     <p>
+            <h3>Runners Registration</h3>
         <form action="index.php" method="POST">
             First Name<input type="text" name="fname"><br />
             Last Name<input type="text" name="lname"><br />
@@ -200,7 +199,7 @@ if (count($tenk_m)){
         Total Count of runners for today (<?php echo $totalcount; ?>) Total Two Mile (<?php echo $TwoMile_count; ?>) Total TenK (<?php echo $TenK_count; ?>) Total Half Mile (<?php echo $HalfMile_count; ?>)
     <p>
     <hr />
-        Add / Update .5 Mile Time
+        <h3>Add / Update .5 Mile Time</h3>
         <form action="index.php" method="POST">
             Bib Number<input type="text" name="bib">
             Time<input type="text" name="time">
@@ -208,7 +207,7 @@ if (count($tenk_m)){
             <input type="hidden" name="form" value=2>
         </form>
     <p>
-        Add / Update 2 Mile Time
+        <h3>Add / Update 2 Mile Time</h3>
         <form action="index.php" method="POST">
             Bib Number<input type="text" name="bib">
             Time<input type="text" name="time">
@@ -216,7 +215,7 @@ if (count($tenk_m)){
             <input type="hidden" name="form" value=3>
         </form>
     <p>
-        Add / Update 10k Time
+        <h3>Add / Update 10k Time</h3>
         <form action="index.php" method="post">
             Bib Number<input type="text" name="bib">
             Time<input type="text" name="time">
@@ -224,7 +223,6 @@ if (count($tenk_m)){
             <input type="hidden" name="form" value=4>
         </form>
     <hr />
-
 <br />
 <form action="index.php" method="post">
     <table>
