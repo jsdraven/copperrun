@@ -50,7 +50,7 @@ $result = DbConnection($query, 'runners');
 
 
 
-$totalcount = '';
+/*$totalcount = '';
 $TenK_count = '';
 $TwoMile_count = '';
 $HalfMile_count = '';
@@ -60,7 +60,6 @@ $twomile_f = array();
 $twomile_m = array();
 $tenk_f = array();
 $tenk_m = array();
-print_r($result);
     while ($row = mysql_fetch_array($result)){
         if ($row['HalfMile'] > 0){
             if($row['Gender'] == 'F'){
@@ -171,7 +170,7 @@ if (count($tenk_m)){
 
 }else{
     $tenkr_m = '';
-}
+}*/
 ?>
 <h1>Copper Run Admin</h1>
     <p>
@@ -185,7 +184,7 @@ if (count($tenk_m)){
             <input type="submit" name="runner" value="Add/Update">
             <input type="hidden" name="form" value=1>
         </form>
-        Total Count of runners for today (<?php echo $totalcount; ?>) Total Two Mile (<?php echo $TwoMile_count; ?>) Total TenK (<?php echo $TenK_count; ?>) Total Half Mile (<?php echo $HalfMile_count; ?>)
+        Total Count of runners for today (<?php //echo $totalcount; ?>) Total Two Mile (<?php //echo $TwoMile_count; ?>) Total TenK (<?php //echo $TenK_count; ?>) Total Half Mile (<?php //echo $HalfMile_count; ?>)
     <p>
     <hr />
         <h3>Add / Update .5 Mile Time</h3>
@@ -242,7 +241,7 @@ if (count($tenk_m)){
                     <td>Bib</td>
                     <td>Time</td>
                 </tr>
-                <?php echo $halfmiler_f; ?>
+                <?php //echo $halfmiler_f; ?>
             </table>
         </td>
         <td>
@@ -255,7 +254,7 @@ if (count($tenk_m)){
                     <td>Bib</td>
                     <td>Time</td>
                 </tr>
-                <?php echo $halfmiler_m; ?>
+                <?php //echo $halfmiler_m; ?>
             </table>
         </td>
     </tr>
@@ -274,7 +273,7 @@ if (count($tenk_m)){
                         <td>Bib</td>
                         <td>Time</td>
                     </tr>
-                    <?php echo $twomiler_f; ?>
+                    <?php //echo $twomiler_f; ?>
             </table>
         </td>
         <td>
@@ -287,7 +286,7 @@ if (count($tenk_m)){
                         <td>Bib</td>
                         <td>Time</td>
                     </tr>
-                    <?php echo $twomiler_m; ?>
+                    <?php //echo $twomiler_m; ?>
             </table>
         </td>
     </tr>
@@ -306,7 +305,7 @@ if (count($tenk_m)){
                         <td>Bib</td>
                         <td>Time</td>
                     </tr>
-                    <?php echo $tenkr_f; ?>
+                    <?php //echo $tenkr_f; ?>
             </table>
         </td>
         <td>
@@ -319,7 +318,7 @@ if (count($tenk_m)){
                         <td>Bib</td>
                         <td>Time</td>
                     </tr>
-                    <?php echo $tenkr_m; ?>
+                    <?php //echo $tenkr_m; ?>
             </table>
         </td>
     </tr>

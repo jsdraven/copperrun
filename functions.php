@@ -2,6 +2,9 @@
 if ($_SERVER['REQUEST_URI'] == '/copperrun/functions.php'){
     die("Not allowed back here!");
 }
+//var is set so to display credit on public sites.
+$programingCredit = "<h3>And programing is brought to you by Mother Lode Makers</h3>";
+
 /*
 **
 ** What we have here is a set of all functions. 
@@ -40,4 +43,32 @@ function timeToSeconds ($time){
     list($hours, $mins, $secs) = explode(':', $time);
     $seconds = ($hours * 3600)+($mins * 60)+ $secs;
     return $seconds;
+}
+
+function publishListing ($filler, $type, $count){
+    $filler_r = "<table class=\"copperrun\">\n";
+    $yr = date('Y');
+    switch($type){
+        case 'halfmile':
+            $filler_r .= "<caption>$yr Half Mile with a total of $count runners</caption>\n";
+            break;
+        case 'twomile':
+            $filler_r .= "<caption>$yr Two Mile with a total of $count runners</caption>\n";
+            break;
+        case 'tenk':
+            $filler_r .= "<caption>$yr Ten K with a total of $count runners</caption>\n";
+            break;
+    }
+    $filler_r .= "<thead><tr><td>Bib</tb><td>Last, First Name</td><td>Age</td><td>Gender</td><td>Time</td></tr></thead>\n";
+    while (list($key, $val) = each($filler)){
+        $fname = $val['FName'];
+        $lname = $val['LName'];
+        $bib = $val['Bib'];
+        $age = $val['Age'];
+        $gender = $val['Gender'];
+        $time = $val['Time'];
+        $filler_r .= "<tr><td>$bib</td><td>$lname, $fname</td><td>$age</td><td>$gender</td><td>$time</td></tr>\n";
+    }
+    $filler_r .= "</table>\n";
+    return $filler_r;
 }

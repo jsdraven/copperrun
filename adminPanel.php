@@ -9,8 +9,9 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/adminPanel.php'){
 				<form action='index.php' method='POST'>
 					<input type="submit" name='set'	value='runnerSearch' />
 					<input type="submit" name='set' value='runners' />
-					<input type="submit" name='set' value='tvFeed' />
+					<input type="submit" name='set' value='tvView' />
 					<input type="submit" name='set' value='raceCat' />
+					<input type="submit" name='set' value='publish' />
 				</form>
 			</td>
 			<td>
