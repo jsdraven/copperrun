@@ -10,7 +10,9 @@ ToDo List
 	b) land on a table of results unless there is only one to return then go strait to result.
 	c) result table will only list first name, and bib. Age and all other info will not be public
 	d) create mobile friendly info page.
-	e) racer placcement results will include place with total 5 other racers first names. 2 ahead and 2 behind or 3 behind is in first and second.
+	e) racer placement results will include place with total 5 other racers first names. 2 ahead and 2 behind or 3 behind is in first and second.
+	f) may need to create a result page that defines the url for the feed.php to use. this will allow me to create a list of optional results if they do a partial name or bib number.
+	g) look into dynamic search field propagation for easier mobile device search technique.
 
 5) Live result TV feed.
 	a) page layout
