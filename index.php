@@ -13,17 +13,18 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
         $source = 'tvFeed';
     }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
         $choice = 'runnerSearch.php';
-        $source = 'rSearch';
-        if (isset($_POST['fname']) && strlen($_POST['fname']) > 0 && $_POST['bnumber'] <= 0) {
-            # code...
-            $source .= '&fname='.$_POST['fname'];
-        }elseif (isset($_POST['bnumber']) && $_POST['bnumber'] > 0 && strlen($_POST['fname']) <= 0) {
-            # code...
-            $source .= '&bnumber='.$_POST['bnumber'];
-        }else{
+        $itemSet = array();
+        if (isset($_POST['fname']) && strlen($_POST['fname']) > 0) {
             $fname = $_POST['fname'];
+            $itemSet['fname'] = $fname;
+        }
+        if (isset($_POST['bnumber']) && $_POST['bnumber'] > 0) {
             $bnumber = $_POST['bnumber'];
-            $source .="&fname=$fname&bnumber=$bnumber";
+            $itemSet['bnumber'] = $bnumber;
+        if (isset($_POST['id']) && $_POST['id'] > 0) {
+            # code...
+            $id = $_POST['id'];
+            $source = 'rSearch&id='.$id;
         }
     }
     require $choice;
@@ -38,7 +39,6 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
 
 }else{
     //all other traffic is directed to the search form to look up racers results and stats.
-    $source = 'rSearch';
     require 'runnerSearch.php';
     
 }

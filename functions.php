@@ -1,3 +1,4 @@
+
 <?php
 if ($_SERVER['REQUEST_URI'] == '/copperrun/functions.php'){
     die("Not allowed back here!");
@@ -71,4 +72,53 @@ function publishListing ($filler, $type, $count){
     }
     $filler_r .= "</table>\n";
     return $filler_r;
+}
+function getRinfo($id){
+    $result['fname'] = 'Justin';
+    $result['bib'] = '123';
+    return $result;
+}
+function rFeed($id){
+//here is where the the array will be built. I will also need to include a key for current place and its value.
+    //first value in the array must be the racer's current place.
+    $info = array();
+
+/*process list
+1) select * from db where ID is ID
+2) user other function to create arrays for searching to find placement and IDs
+3) sort by fastest to slowest within the defined group.
+4) if ID current place is 1 or 2 then truncate array to 4 not 5.
+5) select all needed from db to start return array ID, fname, bib, time , their place
+*/
+    $info['oPlace'] = 6;
+    $info['cPlace'] = 2;
+
+    //below is a pre-built array for testing and place holding.
+    $info['0']['id'] = 12;
+    $info['0']['fname'] = "John";
+    $info['0']['bib'] = 123;
+    $info['0']['time'] = '1:00:01.23';
+
+    $info['1']['id'] = 12;
+    $info['1']['fname'] = "Jim";
+    $info['1']['bib'] = 123;
+    $info['1']['time'] = '1:00:02.23';
+
+    $info['2']['id'] = 12;
+    $info['2']['fname'] = "John";
+    $info['2']['bib'] = 123;
+    $info['2']['time'] = '1:00:10.23';
+
+    $info['3']['id'] = 12;
+    $info['3']['fname'] = "John";
+    $info['3']['bib'] = 123;
+    $info['3']['time'] = '1:01:01.23';
+
+    $info['4']['id'] = 12;
+    $info['4']['fname'] = "John";
+    $info['4']['bib'] = 123;
+    $info['4']['time'] = '1:16:01.23';
+}
+function rSearchList($items){
+    
 }

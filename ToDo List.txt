@@ -6,13 +6,14 @@ ToDo List
  ?what crack is this? 3) create a preemptive form for tracking order of incoming bib numbers.
 
 4) create user's search system
-	a) We will accept first name last name and bib number. Only force at least one item any one of them.
+	a) We will accept first name last name and bib number. Only force at least one item any one or both of them.
 	b) land on a table of results unless there is only one to return then go strait to result.
-	c) result table will only list first name, and bib. Age and all other info will not be public
+	c) result table will only list first name, and bib. Age and all other info will not be public. I will display the results in button form or label. I need a way to decide the record ID not the name or bib within the result. If I use buttons then the name of the button would be used and not the ID. could I hide a button and trigger with a label?YES and all within the same form. <label>$Fname - $bib <input type='submit' hidden='true' name='resultChoice' value='$ID' /></label>
 	d) create mobile friendly info page.
 	e) racer placement results will include place with total 5 other racers first names. 2 ahead and 2 behind or 3 behind is in first and second.
-	f) may need to create a result page that defines the url for the feed.php to use. this will allow me to create a list of optional results if they do a partial name or bib number.
+	f) runnerSearch page will need to be able to show multiple results and send record ID. May also just send all results to this view to shorten coding needs. or do a simple check within the function I need to make to check number of results if 1 then return ID if 0 return error and so on. 
 	g) look into dynamic search field propagation for easier mobile device search technique.
+	h) write function to build race placement list for over all and categories. will also be used by tvFeed.
 
 5) Live result TV feed.
 	a) page layout
