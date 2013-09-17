@@ -10,10 +10,12 @@ ToDo List
 	b) land on a table of results unless there is only one to return then go strait to result.
 	c) result table will only list first name, and bib. Age and all other info will not be public
 	d) create mobile friendly info page.
+	e) racer placcement results will include place with total 5 other racers first names. 2 ahead and 2 behind or 3 behind is in first and second.
 
 5) Live result TV feed.
 	a) page layout
 	b) build it so I could use a configuration file for age ranges and race type.
+	c) Track time stamp every 30 switch viewed race. Must have different color for background so at a glance see what race it is you are looking at.
  
 6) build the input forms with more protection for noob assisted entries.
 

@@ -3,6 +3,21 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/runners.php'){
     die("Not allowed back here!");
 }
 
+//Start testing zone
+$totalcount = '120';
+$TwoMile_count = 120;
+$TenK_count = 120;
+$HalfMile_count = 120;
+$halfmiler_f = '';
+$twomiler_f = '';
+$tenkr_f = '';
+$halfmiler_m = '';
+$twomiler_m = '';
+$tenkr_m = '';
+//end testing zone
+
+
+
 if(isset($_POST['form'])){
     switch ($_POST['form']){
         case 1:
@@ -171,59 +186,59 @@ if (count($tenk_m)){
 }else{
     $tenkr_m = '';
 }*/
-?>
+$body .="
 <h1>Copper Run Admin</h1>
     <p>
             <h3>Runners Registration</h3>
-        <form action="index.php" method="POST">
-            First Name<input type="text" name="fname"><br />
-            Last Name<input type="text" name="lname"><br />
-            F / M: M<input type="radio" name="fm" value="M"> F<input type="radio" name="fm" value="F" tabindex=3><br />
-            Age<input type="text" name="age"><br />
-            Bib Number<input type="text" name="bib"><br />
-            <input type="submit" name="runner" value="Add/Update">
-            <input type="hidden" name="form" value=1>
+        <form action='index.php' method='POST'>
+            First Name<input type='text' name='fname'><br />
+            Last Name<input type='text' name='lname'><br />
+            F / M: M<input type='radio' name='fm' value='M'> F<input type='radio' name='fm' value='F' tabindex=3><br />
+            Age<input type='text' name='age'><br />
+            Bib Number<input type='text' name='bib'><br />
+            <input type='submit' name='runner' value='Add/Update'>
+            <input type='hidden' name='form' value=1>
         </form>
-        Total Count of runners for today (<?php //echo $totalcount; ?>) Total Two Mile (<?php //echo $TwoMile_count; ?>) Total TenK (<?php //echo $TenK_count; ?>) Total Half Mile (<?php //echo $HalfMile_count; ?>)
+        Total Count of runners for today ($totalcount) Total Two Mile ($TwoMile_count) Total TenK ($TenK_count) Total Half Mile ($HalfMile_count)
     <p>
     <hr />
         <h3>Add / Update .5 Mile Time</h3>
-        <form action="index.php" method="POST">
-            Bib Number<input type="text" name="bib">
-            Time<input type="text" name="time">
-            <input type="submit" name="half" value="Add">
-            <input type="hidden" name="form" value=2>
+        <form action='index.php' method='POST'>
+            Bib Number<input type='text' name='bib'>
+            Time<input type='text' name='time'>
+            <input type='submit' name='half' value='Add'>
+            <input type='hidden' name='form' value=2>
         </form>
     <p>
         <h3>Add / Update 2 Mile Time</h3>
-        <form action="index.php" method="POST">
-            Bib Number<input type="text" name="bib">
-            Time<input type="text" name="time">
-            <input type="submit" name="two" value="Add">
-            <input type="hidden" name="form" value=3>
+        <form action='index.php' method='POST'>
+            Bib Number<input type='text' name='bib'>
+            Time<input type='text' name='time'>
+            <input type='submit' name='two' value='Add'>
+            <input type='hidden' name='form' value=3>
         </form>
     <p>
         <h3>Add / Update 10k Time</h3>
-        <form action="index.php" method="post">
-            Bib Number<input type="text" name="bib">
-            Time<input type="text" name="time">
-            <input type="submit" name="tenk" value="Add">
-            <input type="hidden" name="form" value=4>
+        <form action='index.php' method='post'>
+            Bib Number<input type='text' name='bib'>
+            Time<input type='text' name='time'>
+            <input type='submit' name='tenk' value='Add'>
+            <input type='hidden' name='form' value=4>
         </form>
     <hr />
 <br />
-<form action="index.php" method="post">
+<form action='index.php' method='post'>
     <table>
         <tr>
             <td>
-                <input type="text" maxlength="3" lang="4" name="minAge" value="<?php echo $min; ?>"/>
+                <input type='text' maxlength='3' lang='4' name='minAge' value='$min'/>
             </td>
             <td>
-                <input type="text" maxlength="3" lang="4" name="maxAge" value="<?php echo $max; ?>"/>
+                <input type='text' maxlength='3' lang='4' name='maxAge' value='<$max'/>
             </td>
             <td>
-                <input type="submit" value="Age Set" />
-                <input type="hidden" name="form" value="5" />
+                <input type='submit' value='Age Set' />
+                <input type='hidden' name='form' value='5' />
             </td>
         </tr>
     </table>
@@ -241,7 +256,7 @@ if (count($tenk_m)){
                     <td>Bib</td>
                     <td>Time</td>
                 </tr>
-                <?php //echo $halfmiler_f; ?>
+                $halfmiler_f
             </table>
         </td>
         <td>
@@ -254,7 +269,7 @@ if (count($tenk_m)){
                     <td>Bib</td>
                     <td>Time</td>
                 </tr>
-                <?php //echo $halfmiler_m; ?>
+                $halfmiler_m
             </table>
         </td>
     </tr>
@@ -273,7 +288,7 @@ if (count($tenk_m)){
                         <td>Bib</td>
                         <td>Time</td>
                     </tr>
-                    <?php //echo $twomiler_f; ?>
+                    $twomiler_f
             </table>
         </td>
         <td>
@@ -286,7 +301,7 @@ if (count($tenk_m)){
                         <td>Bib</td>
                         <td>Time</td>
                     </tr>
-                    <?php //echo $twomiler_m; ?>
+                    $twomiler_m
             </table>
         </td>
     </tr>
@@ -305,7 +320,7 @@ if (count($tenk_m)){
                         <td>Bib</td>
                         <td>Time</td>
                     </tr>
-                    <?php //echo $tenkr_f; ?>
+                    $tenkr_f
             </table>
         </td>
         <td>
@@ -318,12 +333,9 @@ if (count($tenk_m)){
                         <td>Bib</td>
                         <td>Time</td>
                     </tr>
-                    <?php //echo $tenkr_m; ?>
+                    $tenkr_m
             </table>
         </td>
     </tr>
 </table>
-<?php
-
-
-?>
+";

@@ -17,7 +17,7 @@
                         document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
                         }
                   }
-                xmlhttp.open("GET","tvFeed.php?test=1",true);
+                xmlhttp.open("GET","feed.php?feed=rSearch",true);
                 xmlhttp.send();
             }
             setInterval("loadXMLDoc();", 1000);
