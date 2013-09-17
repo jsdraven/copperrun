@@ -1,18 +1,32 @@
 <?php
+print_r($_POST);
 $body = "";
 //the page with the collection of functions so to be used globally if needed.
 require 'functions.php';
 if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
     //if it is the hosting computer they will be the only controlling admin with the panel giving them access to other features
     require 'adminPanel.php';
-    require $choice;
+    
     if ($choice == 'runnerSearch.php') {
-        # code...
         $source = 'rSearch';
     }elseif ($choice == 'tvView.php') {
-        # code...
         $source = 'tvFeed';
+    }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
+        $choice = 'runnerSearch.php';
+        $source = 'rSearch';
+        if (isset($_POST['fname']) && strlen($_POST['fname']) > 0 && $_POST['bnumber'] <= 0) {
+            # code...
+            $source .= '&fname='.$_POST['fname'];
+        }elseif (isset($_POST['bnumber']) && $_POST['bnumber'] > 0 && strlen($_POST['fname']) <= 0) {
+            # code...
+            $source .= '&bnumber='.$_POST['bnumber'];
+        }else{
+            $fname = $_POST['fname'];
+            $bnumber = $_POST['bnumber'];
+            $source .="&fname=$fname&bnumber=$bnumber";
+        }
     }
+    require $choice;
 }elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.10') {
     //data entry IP is the only other computer with access to data entry not controlling at all
     require 'runners.php';

@@ -20,6 +20,11 @@ $programingCredit
 					<label>Bib Number <input type='text' name='bnumber' id='bnumber' tabindex='1' placeholder='Bib Number' maxlength='3' /></label>
         		</td>
         	</tr>
+                <tr>
+                        <td>
+                                <input type='submit' name='Search' value='Search' />
+                        </td>
+                </tr>
         </table>
 
 ";
