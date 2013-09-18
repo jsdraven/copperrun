@@ -1,5 +1,4 @@
 <?php
-print_r($_POST);
 $source = '';
 $body = "";
 //the page with the collection of functions so to be used globally if needed.
@@ -7,7 +6,6 @@ require 'functions.php';
 if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
     //if it is the hosting computer they will be the only controlling admin with the panel giving them access to other features
     require 'adminPanel.php';
-    echo $choice;
     if ($choice == 'tvView.php') {
         $source = 'tvFeed';
     }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
@@ -35,7 +33,6 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
         # code...
         $source = 'raceCat';
     }
-    echo $source;
     require $choice;
 }elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.10') {
     //data entry IP is the only other computer with access to data entry not controlling at all
