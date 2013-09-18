@@ -74,8 +74,8 @@ function publishListing ($filler, $type, $count){
     return $filler_r;
 }
 function getRinfo($id){
-    $result['fname'] = 'Justin';
-    $result['bib'] = '123';
+    $result['fname'] = 'Jim';
+    $result['bib'] = '110';
     return $result;
 }
 function rFeed($id){
@@ -95,30 +95,68 @@ function rFeed($id){
 
     //below is a pre-built array for testing and place holding.
     $info['0']['id'] = 12;
-    $info['0']['fname'] = "John";
+    $info['0']['fname'] = "Tod";
     $info['0']['bib'] = 123;
     $info['0']['time'] = '1:00:01.23';
+    $info['0']['cPlace'] = 1;
 
     $info['1']['id'] = 12;
     $info['1']['fname'] = "Jim";
-    $info['1']['bib'] = 123;
+    $info['1']['bib'] = 110;
     $info['1']['time'] = '1:00:02.23';
+    $info['1']['cPlace'] = 2;
 
     $info['2']['id'] = 12;
-    $info['2']['fname'] = "John";
-    $info['2']['bib'] = 123;
+    $info['2']['fname'] = "Tim";
+    $info['2']['bib'] = 124;
     $info['2']['time'] = '1:00:10.23';
+    $info['2']['cPlace'] = 3;
 
     $info['3']['id'] = 12;
-    $info['3']['fname'] = "John";
-    $info['3']['bib'] = 123;
+    $info['3']['fname'] = "Greg";
+    $info['3']['bib'] = 116;
     $info['3']['time'] = '1:01:01.23';
+    $info['3']['cPlace'] = 4;
 
     $info['4']['id'] = 12;
     $info['4']['fname'] = "John";
-    $info['4']['bib'] = 123;
+    $info['4']['bib'] = 128;
     $info['4']['time'] = '1:16:01.23';
+    $info['4']['cPlace'] = 5;
+
+    return $info;
 }
 function rSearchList($items){
-    
+/*
+Process for this
+1) check for items in the items array
+2) if bib use it for certain one result
+3) select all with similar fname limit 5 to reduce loading time and clutter.
+4) build array id, fname, bib. Must also include original search fname for using with more list option. 
+*/
+//Jim is the name we used to test with targeted bib 110. cannot use 123, 124, 116, 128.
+
+$list = array();
+
+$list['0']['fname'] = 'Jim';
+$list['0']['bib'] = 119;
+$list['0']['id'] = 32;
+
+$list['1']['fname'] = 'Jim';
+$list['1']['bib'] = 135;
+$list['1']['id'] = 68;
+
+$list['2']['fname'] = 'Jim';
+$list['2']['bib'] = 104;
+$list['2']['id'] = 12;
+
+$list['3']['fname'] = 'Jim';
+$list['3']['bib'] = 110;
+$list['3']['id'] = 128;
+
+$list['4']['fname'] = 'Jim';
+$list['4']['bib'] = 101;
+$list['4']['id'] = 9;
+
+return $list;
 }

@@ -7,11 +7,10 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
     //if it is the hosting computer they will be the only controlling admin with the panel giving them access to other features
     require 'adminPanel.php';
     
-    if ($choice == 'runnerSearch.php') {
-        $source = 'rSearch';
-    }elseif ($choice == 'tvView.php') {
+    if ($choice == 'tvView.php') {
         $source = 'tvFeed';
-    }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
+    }
+    elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
         $choice = 'runnerSearch.php';
         $itemSet = array();
         if (isset($_POST['fname']) && strlen($_POST['fname']) > 0) {
@@ -21,6 +20,7 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
         if (isset($_POST['bnumber']) && $_POST['bnumber'] > 0) {
             $bnumber = $_POST['bnumber'];
             $itemSet['bnumber'] = $bnumber;
+        }
         if (isset($_POST['id']) && $_POST['id'] > 0) {
             # code...
             $id = $_POST['id'];

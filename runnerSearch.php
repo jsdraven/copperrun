@@ -1,23 +1,31 @@
 <?php
+//want plan text <<BACK NEXT>> at the bottom of the view.
 if ($_SERVER['REQUEST_URI'] == '/copperrun/runnerSearch.php'){
     die("Not allowed back here!");
 }
 if (!isset($resultChoice) && strlen($source) > strlen('rSearch')) {
         # code...
-        $results = 
+        $results = rSearchList($items);
+        $rows = "";
+        for ($i=0; $i < 5; $i++) {
+                $Fname = $results[$i]['fname'];
+                $bib = $results[$i]['bib'];
+                $ID = $results[$i]['id'];
+                $rows .= "<tr><td><label>$Fname - $bib <input type='submit' hidden='true' name='resultChoice' value='$ID' /></label></td></tr>\n";
+        }
         $body .=" 
-<form action='index.php' method='POST'>
-<input type='hidden' name='Search' value='Search' />
-        <table border='1'>
+                <form action='index.php' method='POST'>
+                <input type='hidden' name='Search' value='Search' />
+                        <table border='1'>
 
-                <tr>
-                        <td align='center'>
-                                Select one please.
-                        </td>
-                </tr>
-
-        </table>
- "
+                                <tr>
+                                        <td align='center'>
+                                                Select one please.
+                                        </td>
+                                </tr>
+                                $rows
+                        </table>
+ ";
 }elseif (isset($resultChoice)) {
         # here is were source is set
         $source = 'rSearch&id='.$resultChoice;
@@ -32,7 +40,7 @@ $programingCredit
         <table>
                 <tr>
                         <td>
-                                        <label>First Name <input type='text' name='fname' id='fname' tabeindex='0' autofocus placeholder='$name' maxlength='13' pattern'[A-Za-z]{3}' /></label>
+                                        <label>First Name <input type='text' name='fname' id='fname' tabeindex='0' autofocus placeholder='$name' maxlength='13' pattern='[A-Za-z]{3}' /></label>
                         </td>
                 </tr>
                 <tr>
