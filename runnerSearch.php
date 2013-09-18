@@ -35,38 +35,26 @@ if (!isset($_POST['resultChoice']) && isset($itemSet)) {
         $rInfo = getRinfo($resultChoice);
         $name = $rInfo['fname'];
         $bib = $rInfo['bib'];
-                $body .="<h1>Runner Search</h1>
+                $body .="<h3>Runner Search</h3>
 $programingCredit
 
         <div id='myDiv'>One moment while I fetch your information.</div>
-                <form action='index.php' method='POST'>
-        <table>
-                <tr>
-                        <td>
-                                        <label>First Name <input type='text' name='fname' id='fname' tabeindex='0' autofocus placeholder='$name' maxlength='13' pattern='[A-Za-z]{3}' /></label>
-                        </td>
-                </tr>
-                <tr>
-                        <td align='center'>
-                                --Or--
-                        </td>
-                </tr>
-                <tr>
-                        <td>
-                                        <label>Bib Number <input type='text' name='bnumber' id='bnumber' tabindex='1' placeholder='$bib' maxlength='3' /></label>
-                        </td>
-                </tr>
-                <tr>
-                        <td>
-                                <input type='submit' name='Search' value='Search' />
-                        </td>
-                </tr>
-        </table>
+            <form action='index.php'>
+                <label>Search Again<input hidden='true' type='submit' /></label>
+                </form>
 
 ";
-}else {
+}elseif (isset($_POST['Search']) && $_POST['Search'] == 'Lboard') {
+    # code...
+    $body .="<div id='myDiv'>One moment while I fetch your information.</div>
+        <form action='index.php'>
+        <label>Back to Search<input type='submit' hidden='true' /></label>
+        </form>
+    ";
+}
+else {
         # code...
-        $body .="<h1>Runner Search</h1>
+        $body .="<h3>Runner Search</h3>
 $programingCredit
 
                 <form action='index.php' method='POST'>
@@ -88,7 +76,7 @@ $programingCredit
                 </tr>
                 <tr>
                         <td>
-                                <input type='submit' name='Search' value='Search' />
+                                <label>Search<input type='submit' hidden='true' name='Search' value='Search' /></label> -- or -- <label>Category Leaders<input type='submit' hidden='true' name='Search' value='Lboard' /></label>
                         </td>
                 </tr>
         </table>

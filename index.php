@@ -27,6 +27,10 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
             $id = $_POST['id'];
             $source = 'rSearch&id='.$id;
         }
+    }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Lboard') {
+        # code...
+        $choice = 'runnerSearch.php';
+        $source = 'Lboard';
     }
     require $choice;
 }elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.10') {

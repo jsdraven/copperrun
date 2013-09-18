@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/functions.php'){
     die("Not allowed back here!");
 }
 //var is set so to display credit on public sites.
-$programingCredit = "<h3>And programing is brought to you by Mother Lode Makers</h3>";
+$programingCredit = "<h3>And programing is brought to you<br /> by Mother Lode Makers</h3>";
 
 /*
 **
@@ -35,7 +35,7 @@ function listing ($filler){
     return $filler_r;
 }
 function DbConnection($query, $table){
-    $copperrun = mysql_connect('localhost', 'root', '');
+    $copperrun = mysql_connect('localhost', 'root', 'root');
     mysql_selectdb($table, $copperrun);
     $result = mysql_query($query);
     return $result;
@@ -72,11 +72,6 @@ function publishListing ($filler, $type, $count){
     }
     $filler_r .= "</table>\n";
     return $filler_r;
-}
-function getRinfo($id){
-    $result['fname'] = 'Jim';
-    $result['bib'] = '110';
-    return $result;
 }
 function rFeed($id){
 //here is where the the array will be built. I will also need to include a key for current place and its value.

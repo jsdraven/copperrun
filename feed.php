@@ -60,4 +60,7 @@ switch($_GET['feed']){
 	case 'tvFeed':
 		echo "TV Feed Result Page!";
 	break;
+	case 'Lboard':
+		echo "Leaber board results";
+	break;
 }
