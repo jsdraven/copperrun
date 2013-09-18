@@ -3,7 +3,7 @@
 if ($_SERVER['REQUEST_URI'] == '/copperrun/runnerSearch.php'){
     die("Not allowed back here!");
 }
-echo $source;
+$body .= "<h3>Runner Search</h3>";
 
 if (!isset($_POST['resultChoice']) && isset($itemSet)) {
         # code...
@@ -35,7 +35,7 @@ if (!isset($_POST['resultChoice']) && isset($itemSet)) {
         $rInfo = getRinfo($resultChoice);
         $name = $rInfo['fname'];
         $bib = $rInfo['bib'];
-                $body .="<h3>Runner Search</h3>
+                $body .="
 $programingCredit
 
         <div id='myDiv'>One moment while I fetch your information.</div>
@@ -51,10 +51,9 @@ $programingCredit
         <label>Back to Search<input type='submit' hidden='true' /></label>
         </form>
     ";
-}
-else {
+}else {
         # code...
-        $body .="<h3>Runner Search</h3>
+        $body .="
 $programingCredit
 
                 <form action='index.php' method='POST'>

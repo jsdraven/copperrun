@@ -63,4 +63,7 @@ switch($_GET['feed']){
 	case 'Lboard':
 		echo "Leaber board results";
 	break;
+	case 'raceCat':
+		echo "Race Cat listings here";
+	break;
 }

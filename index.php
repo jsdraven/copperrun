@@ -7,11 +7,10 @@ require 'functions.php';
 if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
     //if it is the hosting computer they will be the only controlling admin with the panel giving them access to other features
     require 'adminPanel.php';
-    
+    echo $choice;
     if ($choice == 'tvView.php') {
         $source = 'tvFeed';
-    }
-    elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
+    }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
         $choice = 'runnerSearch.php';
         $itemSet = array();
         if (isset($_POST['fname']) && strlen($_POST['fname']) > 0) {
@@ -32,6 +31,11 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
         $choice = 'runnerSearch.php';
         $source = 'Lboard';
     }
+    if ($choice == 'raceCat.php') {
+        # code...
+        $source = 'raceCat';
+    }
+    echo $source;
     require $choice;
 }elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.10') {
     //data entry IP is the only other computer with access to data entry not controlling at all
