@@ -14,6 +14,7 @@ ToDo List
 	f) runnerSearch page will need to be able to show multiple results and send record ID. May also just send all results to this view to shorten coding needs. or do a simple check within the function I need to make to check number of results if 1 then return ID if 0 return error and so on. 
 	g) look into dynamic search field propagation for easier mobile device search technique.
 	h) write function to build race placement list for over all and categories. will also be used by tvFeed.
+	i) Leader boards. I need a system upgrade to handle leader board offering and selections
 
 5) Live result TV feed.
 	a) page layout
@@ -25,3 +26,4 @@ ToDo List
 7) build report methods for my use only.
 
 8) TV feed control options in the admin panel for what race set to show. Need to revise the admin panel so that there could be one controlling admin but two or more data entry.
+9) Form sanitation and validation items. First name. Last Name, Bib number, Age, Gender, Time, Record ID and any other items you can think of that is editable by anyone that is sent to the db.
