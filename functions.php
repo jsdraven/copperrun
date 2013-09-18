@@ -94,25 +94,25 @@ function rFeed($id){
     $info['cPlace'] = 2;
 
     //below is a pre-built array for testing and place holding.
-    $info['0']['id'] = 12;
+    $info['0']['id'] = 1;
     $info['0']['fname'] = "Tod";
     $info['0']['bib'] = 123;
     $info['0']['time'] = '1:00:01.23';
     $info['0']['cPlace'] = 1;
 
-    $info['1']['id'] = 12;
+    $info['1']['id'] = 128;
     $info['1']['fname'] = "Jim";
     $info['1']['bib'] = 110;
     $info['1']['time'] = '1:00:02.23';
     $info['1']['cPlace'] = 2;
 
-    $info['2']['id'] = 12;
+    $info['2']['id'] = 115;
     $info['2']['fname'] = "Tim";
     $info['2']['bib'] = 124;
     $info['2']['time'] = '1:00:10.23';
     $info['2']['cPlace'] = 3;
 
-    $info['3']['id'] = 12;
+    $info['3']['id'] = 92;
     $info['3']['fname'] = "Greg";
     $info['3']['bib'] = 116;
     $info['3']['time'] = '1:01:01.23';

@@ -3,15 +3,17 @@
 if ($_SERVER['REQUEST_URI'] == '/copperrun/runnerSearch.php'){
     die("Not allowed back here!");
 }
-if (!isset($resultChoice) && strlen($source) > strlen('rSearch')) {
+echo $source;
+
+if (!isset($_POST['resultChoice']) && isset($itemSet)) {
         # code...
-        $results = rSearchList($items);
+        $results = rSearchList($itemSet);
         $rows = "";
         for ($i=0; $i < 5; $i++) {
                 $Fname = $results[$i]['fname'];
                 $bib = $results[$i]['bib'];
                 $ID = $results[$i]['id'];
-                $rows .= "<tr><td><label>$Fname - $bib <input type='submit' hidden='true' name='resultChoice' value='$ID' /></label></td></tr>\n";
+                $rows .= "<tr><td align='center'><label>$Fname - $bib <input type='submit' hidden='true' name='resultChoice' value='$ID' /></label></td></tr>\n";
         }
         $body .=" 
                 <form action='index.php' method='POST'>
@@ -26,8 +28,9 @@ if (!isset($resultChoice) && strlen($source) > strlen('rSearch')) {
                                 $rows
                         </table>
  ";
-}elseif (isset($resultChoice)) {
+}elseif (isset($_POST['resultChoice'])) {
         # here is were source is set
+        $resultChoice = $_POST['resultChoice'];
         $source = 'rSearch&id='.$resultChoice;
         $rInfo = getRinfo($resultChoice);
         $name = $rInfo['fname'];

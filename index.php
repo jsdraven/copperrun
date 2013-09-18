@@ -1,5 +1,6 @@
 <?php
 print_r($_POST);
+$source = '';
 $body = "";
 //the page with the collection of functions so to be used globally if needed.
 require 'functions.php';
