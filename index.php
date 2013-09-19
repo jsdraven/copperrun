@@ -1,6 +1,7 @@
 <?php
 $source = '';
 $body = "";
+print_r($_POST);
 //the page with the collection of functions so to be used globally if needed.
 require 'functions.php';
 if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
@@ -29,7 +30,15 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
         $choice = 'runnerSearch.php';
         $source = 'Lboard';
     }
-    if ($choice == 'raceCat.php') {
+    if (isset($_POST['setCat']) && $_POST['setCat'] == 'Submit') {
+        # code...
+        $list['max'] = $_POST['maxAge'];
+        $list['min'] = $_POST['minAge'];
+        $list['type'] = $_POST['raceType'];
+        $list['gender'] = $_POST['gen'];
+        $choice = 'raceCat.php';
+        $source = 'raceCat';
+    }elseif ($choice == 'raceCat.php') {
         # code...
         $source = 'raceCat';
     }
