@@ -10,7 +10,7 @@ print_r($result2);*/
 
 function myInsert($stuff){
 
-    
+    $date = date('Y');    
     $type = array_keys($stuff);
     //$fType = $type['0'].'F';
     //$mType = $type['0'].'M';
@@ -20,8 +20,15 @@ function myInsert($stuff){
         $Type['1'] = $key.'M';
         for ($i=0; $i < 2; $i++) { 
             # code...
-            $sql = "INSERT INTO raceCat ($Type[$i]) VALUES($value)";
-            echo "$sql<br />";
+            $type = $Type[$i];
+            foreach ($value as $item) {
+                # code...
+                $sql = "INSERT INTO raceCat ($type, year) VALUES(\"$item\", \"$date\")";
+                echo "$sql<br />";
+                $result = DbConnection($sql);
+                echo "$result<br />";
+            }
+            
         }
         
     }
