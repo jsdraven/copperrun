@@ -28,6 +28,7 @@ ToDo List
 
 7) TV feed control options in the admin panel for what race set to show. Need to revise the admin panel so that there could be one controlling admin but two or more data entry.
 8) Form sanitation and validation items. First name. Last Name, Bib number, Age, Gender, Time, Record ID and any other items you can think of that is editable by anyone that is sent to the db.
+9) I will need to include a function in functions that will test IP so I can have the same system as in index. across multiple systems.
 
 
 
@@ -36,6 +37,7 @@ FINAL NOTES
 Processes:
 Finishline - Have need of data entry computer there with one form. Dropdown auto populated on submit from last submit to keep within current race. The Form will also auto load first name tied to bib number to make sure the correct bib is typed and the correct racer gets credit due. Time clock trackers or runners will hand bib and place numbers to this person. For redundentcy I would like a clipboard with a list to write bib to place number. This data could and would be used to update the TV Feed / Mobile Search. when they print the slip they will pass it to data entry inside. Inside will use similer form to input place and time. Place will be used to find racer and update time. 
 
+Data Entry - I will have a landing page listing data entry types. This will send them to a dedicated data entry page seporate from index.php. This will help with simplicity on coding and faster data processing and flow. 3 options will need to be had. Registration, Finishline, Time in, (and a forth to use if we cannot modify the finishline process).
 OFFICIAL RACE CAT for 2014
  10K 
 5-12

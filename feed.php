@@ -75,47 +75,118 @@ switch($_GET['feed']){
 		$twomilem = "";
 		foreach ($results as $key => $value) {
 			# code...
-			if ($key == 'TwoMileF') {
+			if (strlen($value['TwoMileF']) > 0) {
 				# code...
-				$twomilef = "<tr><td>$value</td></tr>";
+				$type = 'TwoMileF';
+				$item = $value[$type];
+				$twomilef .= "<tr><td><label>$item<input type='submit' hidden='true' name='$type' value='$item'></label></td></tr>\n";
 			}
-			if ($key == 'TwoMileM') {
+			if (strlen($value['TwoMileM']) > 0) {
 				# code...
-				$twomilem = "<tr><td>$value</td></tr>";
+				$type = 'TwoMileM';
+				$item = $value[$type];
+				$twomilem .= "<tr><td><label>$item<input type='submit' hidden='true' name='$type' value='$item'></label></td></tr>\n";				
 			}
-			if ($key == 'HalfMileF') {
+			if (strlen($value['HalfMileF']) > 0) {
 				# code...
-				$halfmilef = "<tr><td>$value</td></tr>";
+				$item = $value['HalfMileF'];
+				$halfmilef .= "<tr><td>$item</td></tr>";
 			}
-			if ($key == 'HalfMileM') {
+			if (strlen($value['HalfMileM']) > 0) {
 				# code...
-				$halfmilem = "<tr><td>$value</td></tr>";
+				$item = $value['HalfMileM'];
+				$halfmilem .= "<tr><td>$item</td></tr>";
 			}
-			if ($key == 'TenKF') {
+			if (strlen($value['TenKF']) > 0) {
 				# code...
-				$tenkf .= "<tr><td>$value</td></tr>";
+				$item = $value['TenKF'];
+				$tenkf .= "<tr><td>$item</td></tr>";
 			}
-			if ($key == 'TenKM') {
+			if (strlen($value['TenKM']) > 0) {
 				# code...
-				$tenkm = "<tr><td>$value</td></tr>";
+				$item = $value['TenKM'];
+				$tenkm .= "<tr><td>$item</td></tr>";
 			}
 		}
-		echo "
-<table>
-<tr>
-<td>
-Mens
-</td>
-<td>
-Female
-</td>
-</tr>
-<tr>
-<td>
-<table>
-<tr><td>Two Mile</td></tr>
-
-
+		echo "<form action='index.php' method='POST'>
+<table border=\"1\">
+	<tr>
+		<td>
+			Mens
+		</td>
+		<td>
+			Female
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td>
+						<strong>Men's Two Mile </strong> 
+					</td>
+				</tr>
+				$twomilem
+			</table>
+		</td>
+		<td>
+			<table>
+				<tr>
+					<td>
+						<strong>Women's Two Mile</strong> 
+					</td>
+				</tr>
+				$twomilef
+				
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td>
+						<strong>Men's Ten K</strong> 
+					</td>
+				</tr>
+				$tenkm
+			</table>
+		</td>
+		<td>
+			<table>
+				<tr>
+					<td>
+						<strong>Women's Ten K</strong> 
+					</td>
+				</tr>
+				$tenkf
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td>
+						<strong>Men's Half Mile</strong> 
+					</td>
+				</tr>
+				$halfmilem
+			</table>
+		</td>
+		<td>
+			<table>
+				<tr>
+					<td>
+						<strong>Women's Half Mile</strong> 
+					</td>
+				</tr>
+				$halfmilef
+			</table>
+		</td>
+	</tr>
+</table>
+</form>
 		";
 	break;
 }
