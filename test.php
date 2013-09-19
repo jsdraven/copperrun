@@ -25,7 +25,7 @@ function myInsert($stuff){
                 # code...
                 $sql = "INSERT INTO raceCat ($type, year) VALUES(\"$item\", \"$date\")";
                 echo "$sql<br />";
-                $result = DbConnection($sql);
+                //$result = DbConnection($sql);
                 echo "$result<br />";
             }
             
