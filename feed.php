@@ -64,6 +64,58 @@ switch($_GET['feed']){
 		echo "Leaber board results";
 	break;
 	case 'raceCat':
-		echo "Race Cat listings here";
+		$date = date('Y');
+		$sql = "SELECT * FROM raceCat WHERE year=$date";
+		$results = DbConnection($sql);
+		$tenkf = "";
+		$halfmilef = "";
+		$twomilef = "";
+		$tenkm = "";
+		$halfmilem = "";
+		$twomilem = "";
+		foreach ($results as $key => $value) {
+			# code...
+			if ($key == 'TwoMileF') {
+				# code...
+				$twomilef = "<tr><td>$value</td></tr>";
+			}
+			if ($key == 'TwoMileM') {
+				# code...
+				$twomilem = "<tr><td>$value</td></tr>";
+			}
+			if ($key == 'HalfMileF') {
+				# code...
+				$halfmilef = "<tr><td>$value</td></tr>";
+			}
+			if ($key == 'HalfMileM') {
+				# code...
+				$halfmilem = "<tr><td>$value</td></tr>";
+			}
+			if ($key == 'TenKF') {
+				# code...
+				$tenkf .= "<tr><td>$value</td></tr>";
+			}
+			if ($key == 'TenKM') {
+				# code...
+				$tenkm = "<tr><td>$value</td></tr>";
+			}
+		}
+		echo "
+<table>
+<tr>
+<td>
+Mens
+</td>
+<td>
+Female
+</td>
+</tr>
+<tr>
+<td>
+<table>
+<tr><td>Two Mile</td></tr>
+
+
+		";
 	break;
 }

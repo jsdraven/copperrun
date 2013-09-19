@@ -2,10 +2,11 @@ ToDo List
 
  (done) 1) Fix sorting of times cannot trust natural sort. may want to do a pop to end of array. 
     (convert time stamp into seconds then sort seconds with natural sort. will need two functions, convert time to seconds and convert seconds to time readable)
- 2) Set multiple tables for results. using MySQL records, ID A.I. and year. I will need to generate form to remove bad records and add intended records. AKA HDTV Output
- ?what crack is this? 3) create a preemptive form for tracking order of incoming bib numbers.
+    (all the above is a mute point if we can have data entry at finish line.)
+ 
+ ?what crack is this? 2) create a preemptive form for tracking order of incoming bib numbers. (This is a finishline data entry form. pre select what race. as runners cross inpute bib, place number. when clock print is available type in place, time. it will update bib and done.)
 
-4) create user's search system
+3) create user's search system
 	a) We will accept first name last name and bib number. Only force at least one item any one or both of them.
 	b) land on a table of results unless there is only one to return then go strait to result.
 	c) result table will only list first name, and bib. Age and all other info will not be public. I will display the results in button form or label. I need a way to decide the record ID not the name or bib within the result. If I use buttons then the name of the button would be used and not the ID. could I hide a button and trigger with a label?YES and all within the same form. <label>$Fname - $bib <input type='submit' hidden='true' name='resultChoice' value='$ID' /></label>
@@ -16,18 +17,26 @@ ToDo List
 	h) write function to build race placement list for over all and categories. will also be used by tvFeed.
 	i) Leader boards. I need a system upgrade to handle leader board offering and selections
 
-5) Live result TV feed.
+4) Live result TV feed.
 	a) page layout
-	b) build it so I could use a configuration file for age ranges and race type.
+	b) build it so I could use a db record set for age ranges and race type.
 	c) Track time stamp every 30 switch viewed race. Must have different color for background so at a glance see what race it is you are looking at.
  
-6) build the input forms with more protection for noob assisted entries.
+5) build the input forms with more protection for noob assisted entries.
 
-7) build report methods for my use only.
+6) build report methods for my use only.
 
-8) TV feed control options in the admin panel for what race set to show. Need to revise the admin panel so that there could be one controlling admin but two or more data entry.
-9) Form sanitation and validation items. First name. Last Name, Bib number, Age, Gender, Time, Record ID and any other items you can think of that is editable by anyone that is sent to the db.
+7) TV feed control options in the admin panel for what race set to show. Need to revise the admin panel so that there could be one controlling admin but two or more data entry.
+8) Form sanitation and validation items. First name. Last Name, Bib number, Age, Gender, Time, Record ID and any other items you can think of that is editable by anyone that is sent to the db.
 
+
+
+FINAL NOTES
+
+Processes:
+Finishline - Have need of data entry computer there with one form. Dropdown auto populated on submit from last submit to keep within current race. The Form will also auto load first name tied to bib number to make sure the correct bib is typed and the correct racer gets credit due. Time clock trackers or runners will hand bib and place numbers to this person. For redundentcy I would like a clipboard with a list to write bib to place number. This data could and would be used to update the TV Feed / Mobile Search. when they print the slip they will pass it to data entry inside. Inside will use similer form to input place and time. Place will be used to find racer and update time. 
+
+OFFICIAL RACE CAT for 2014
  10K 
 5-12
 13-19
