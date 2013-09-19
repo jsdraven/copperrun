@@ -4,7 +4,7 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/functions.php'){
     die("Not allowed back here!");
 }
 //var is set so to display credit on public sites.
-$programingCredit = "<h3>And programing is brought to you<br /> by Mother Lode Makers</h3>";
+$programingCredit = "<h3>And programing is brought to you by<br /> Mother Lode Makers</h3>";
 
 /*
 **
@@ -34,10 +34,10 @@ function listing ($filler){
     }
     return $filler_r;
 }
-function DbConnection($query, $table){
-    $copperrun = mysql_connect('localhost', 'root', 'root');
-    mysql_selectdb($table, $copperrun);
-    $result = mysql_query($query);
+function DbConnection($query){
+    $copperrun = mysqli_connect('localhost', 'root', 'root', 'copperrun');
+    $result = mysqli_query($copperrun, $query);
+    mysqli_close($copperrun);
     return $result;
 }
 function timeToSeconds ($time){
@@ -72,6 +72,14 @@ function publishListing ($filler, $type, $count){
     }
     $filler_r .= "</table>\n";
     return $filler_r;
+}
+function raceCatArray(){
+    //i will create an array based on stored age ranges for each gender. $Array=>raceType=>Gender=>ageRange=>RacerList.
+    $year = date('Y');
+    $query1 = 'SELECT * FROM runners';
+    $query2 = 'SELECT * FROM raceCat WHERE year == '.$year;
+    $result1 = DbConnection($query1);
+    $result2 = DbConnection($query2);
 }
 function rFeed($id){
 //here is where the the array will be built. I will also need to include a key for current place and its value.
