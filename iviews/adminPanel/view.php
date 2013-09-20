@@ -6,7 +6,7 @@ $body .="
 			<td>
 				<form action='index.php' method='POST'>
 					<input type=\"submit\" name='set'	value='runnerSearch' />
-					<input type=\"submit\" name='set' value='runners' />
+					<input type=\"submit\" name='set' value='runnerRegi' />
 					<input type=\"submit\" name='set' value='tvView' />
 					<input type=\"submit\" name='set' value='raceCat' />
 					<input type=\"submit\" name='set' value='publish' />

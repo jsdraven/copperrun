@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == '/copperrun/adminPanel.php'){
+if ($_SERVER['REQUEST_URI'] == '/copperrun/iViews/adminPanel/index.php'){
     die("Not allowed back here!");
 }
 	if (isset($_POST['set'])){
