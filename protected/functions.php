@@ -35,7 +35,7 @@ function listing ($filler){
     return $filler_r;
 }
 function DbConnection($query){
-    $copperrun = mysqli_connect('localhost', 'root', 'root', 'copperrun');
+    $copperrun = mysqli_connect('localhost', 'copperrun', 'copperrun');
     $result = mysqli_query($copperrun, $query);
     mysqli_close($copperrun);
     return $result;
