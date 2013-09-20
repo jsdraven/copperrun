@@ -58,10 +58,24 @@ switch($_GET['feed']){
 			}	
 	break;
 	case 'tvFeed':
-		echo "TV Feed Result Page!";
+?>
+		<table width="100%">
+			<thead>
+				<tr>
+					<td colspan="2">Half Mile</td><td colspan="2">Two Mile</td><td colspan="2">10K</td>
+				</tr>
+				<tr>
+					<td>Male</td><td>Female</td><td>Male</td><td>Female</td><td>Male</td><td>Female</td>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+<?php
 	break;
 	case 'Lboard':
-		echo "Leaber board results";
+		echo "Leader board results";
 	break;
 	case 'raceCat':
 		$date = date('Y');

@@ -47,7 +47,7 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
     //data entry IP is the only other computer with access to data entry not controlling at all
     require 'runners.php';
 
-}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.15') {
+}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.114') {
     //TV Feed only IP to the TV Feed. May open up to others later as another page options. Down side you cannot make it mobile friendly very easy.
     $source = 'tvFeed';
     require 'tvView.php';
@@ -74,7 +74,7 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
                         document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
                         }
                   }
-                xmlhttp.open("GET","feed.php?feed=<?php if (isset($source)) {echo $source;};?>",true);
+                xmlhttp.open("GET","feed.php?feed=<?php if (isset($source)) echo $source;?>",true);
                 xmlhttp.send();
             }
             setInterval("loadXMLDoc();", 1000);
