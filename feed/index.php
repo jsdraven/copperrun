@@ -1,8 +1,9 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == '/copperrun/feed.php'){
+if ($_SERVER['REQUEST_URI'] == '/copperrun/feed/index.php'){
     die("Not allowed back here!");
 }
-require 'functions.php';
+
+require '../protected/functions.php';
 switch($_GET['feed']){
 	case 'rSearch':
 		if (isset($_GET['id']) && $_GET['id'] > 0) {
@@ -58,21 +59,7 @@ switch($_GET['feed']){
 			}	
 	break;
 	case 'tvFeed':
-?>
-		<table width="100%">
-			<thead>
-				<tr>
-					<td colspan="2">Half Mile</td><td colspan="2">Two Mile</td><td colspan="2">10K</td>
-				</tr>
-				<tr>
-					<td>Male</td><td>Female</td><td>Male</td><td>Female</td><td>Male</td><td>Female</td>
-				</tr>
-			</thead>
-			<tbody>
-
-			</tbody>
-		</table>
-<?php
+		require 'fViews/tvFeed/index.php';
 	break;
 	case 'Lboard':
 		echo "Leader board results";

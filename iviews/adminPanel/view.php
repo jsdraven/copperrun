@@ -1,7 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == '/copperrun/adminPanel.php'){
-    die("Not allowed back here!");
-}
+
 $body .="
 	<table border=1 >
 		<tr>
@@ -28,13 +26,3 @@ $body .="
 		</tr>
 	</table>
 ";
-
-	if (isset($_POST['set'])){
-		$choice = $_POST['set'].'.php';
-	}elseif (isset($_POST['reports'])){
-		$choice = 'reports.php';
-		$report = $_POST['reports'];
-	}else{
-		$choice = 'runners.php';
-	}
-	
