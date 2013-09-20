@@ -80,6 +80,16 @@ function raceCatArray(){
     $query2 = 'SELECT * FROM raceCat WHERE year == '.$year;
     $result1 = DbConnection($query1);
     $result2 = DbConnection($query2);
+    //I need to stack each age range into sepporate arrays per race type/gender.
+    //Knowing the race type I could search 
+
+    return $group;
+}
+function getRinfo($id){
+    $items['fname'] = 'Jim';
+    $items['bib'] = 110;
+
+    return $items;
 }
 function rFeed($id){
 //here is where the the array will be built. I will also need to include a key for current place and its value.
