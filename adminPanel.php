@@ -12,6 +12,8 @@ $body .="
 					<input type=\"submit\" name='set' value='tvView' />
 					<input type=\"submit\" name='set' value='raceCat' />
 					<input type=\"submit\" name='set' value='publish' />
+					<input type=\"submit\" name='set' value='finishLine' />
+					<input type=\"submit\" name='set' value='flUpdate' />
 				</form>
 			</td>
 			<td>
