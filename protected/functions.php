@@ -11,6 +11,11 @@ $programingCredit = "<h3>And programing is brought to you by<br /> Mother Lode M
 ** What we have here is a set of all functions. 
 **
 */
+//DB Settings, easy to find. 
+define('dbUser', 'root');
+define('dbPass', 'root');
+define('dbHost', 'localhost');
+
 function listing ($filler){
     $filler_r = '';
     ksort($filler);
@@ -35,10 +40,16 @@ function listing ($filler){
     return $filler_r;
 }
 function DbConnection($query){
-    $copperrun = mysqli_connect('localhost', 'copperrun', 'copperrun');
+    $DB_User = constant('dbUser');
+    $DB_Password = constant('dbPass');
+    $DB_Host = constant('dbHost');
+    $dbInfo['user'] = $DB_User;
+    $dbInfo['pw'] = $DB_Password;
+    $dbInfo['host'] = $DB_Host;
+    $copperrun = mysqli_connect($DB_Host, $DB_User, $DB_Password);
     $result = mysqli_query($copperrun, $query);
     mysqli_close($copperrun);
-    return $result;
+    return $dbInfo;
 }
 function timeToSeconds ($time){
     list($hours, $mins, $secs) = explode(':', $time);

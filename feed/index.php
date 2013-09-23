@@ -74,7 +74,8 @@ switch($_GET['feed']){
 		$tenkm = "";
 		$halfmilem = "";
 		$twomilem = "";
-		foreach ($results as $key => $value) {
+		print_r($results);
+/*		foreach ($results as $key => $value) {
 			# code...
 			if (strlen($value['TwoMileF']) > 0) {
 				# code...
@@ -108,7 +109,7 @@ switch($_GET['feed']){
 				$item = $value['TenKM'];
 				$tenkm .= "<tr><td>$item</td></tr>";
 			}
-		}
+		}*/
 		echo "<form action='index.php' method='POST'>
 <table border=\"1\">
 	<tr>
