@@ -2,6 +2,7 @@
 $source = '';
 $body = "";
 print_r($_POST);
+
 //the page with the collection of functions so to be used globally if needed.
 require 'protected/functions.php';
 if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
