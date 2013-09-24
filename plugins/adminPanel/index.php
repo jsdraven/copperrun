@@ -49,11 +49,11 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/iViews/adminPanel/index.php'){
     }
     $views = '';
     $reports = '';
-foreach (scandir('iviews') as $key => $value) {
+foreach (scandir('plugins') as $key => $value) {
     # code...
     if (strlen($value) < 3 || $value == 'adminPanel') {
         # code...
-    }elseif (is_dir('iviews/'.$value)) {
+    }elseif (is_dir('plugins/'.$value)) {
         $views .= "<input type=\"submit\" name='set' value='$value' />\n";
     }
 }

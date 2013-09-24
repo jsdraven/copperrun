@@ -4,7 +4,21 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/feed/index.php'){
 }
 
 require '../protected/functions.php';
-switch($_GET['feed']){
+
+
+if (isset($_GET['feed'])) {
+	# code...
+	echo $_GET['feed'];
+	$path = 'fViews/'.$_GET['feed'];
+
+	if (is_dir($path)) {
+	        require $path.'/index.php';
+	    }
+}
+
+
+
+/*switch($_GET['feed']){
 	case 'rSearch':
 		require 'fviews/rSearch/index.php';	
 	break;
@@ -17,4 +31,4 @@ switch($_GET['feed']){
 	case 'raceCat':
 		require 'fViews/raceCat/index.php';
 	break;
-}
+}*/
