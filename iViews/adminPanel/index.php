@@ -47,4 +47,23 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/iViews/adminPanel/index.php'){
         # code...
         $source = 'raceCat';
     }
+    $views = '';
+    $reports = '';
+foreach (scandir('iviews') as $key => $value) {
+    # code...
+    if (strlen($value) < 3 || $value == 'adminPanel') {
+        # code...
+    }elseif (is_dir('iviews/'.$value)) {
+        $views .= "<input type=\"submit\" name='set' value='$value' />\n";
+    }
+}
+foreach (scandir('reports/rViews') as $key => $value) {
+    # code...
+    if (strlen($value) < 3) {
+        # code...
+    }elseif (is_dir('reports/rViews/'.$value)) {
+        $reports .= "<input type='submit' name='reports' value='$value' />\n";
+    }
+}
+
 require "view.php";
