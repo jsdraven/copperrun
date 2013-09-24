@@ -1,11 +1,12 @@
 <?php
+echo 'hi';
 if (isset($_GET['id']) && $_GET['id'] > 0) {
 	# code...
 $info = rFeed($_GET['id']);
 //array shift pops the first element into the var removing it from the rest of the array.
 $oPlace = array_shift($info);
 $cPlace = array_shift($info);
-if ($cPlace <= 2) {
+if ($oPlace <= 2) {
 	# code...
 	$count = 5;
 }else{

@@ -31,7 +31,8 @@ if (!isset($_POST['resultChoice']) && isset($itemSet)) {
 }elseif (isset($_POST['resultChoice'])) {
         # here is were source is set
         $resultChoice = $_POST['resultChoice'];
-        $source = 'rSearch&id='.$resultChoice;
+        $source = 'runnerSearch';
+        $option = 'id='.$resultChoice;
         $rInfo = getRinfo($resultChoice);
         $name = $rInfo['fname'];
         $bib = $rInfo['bib'];

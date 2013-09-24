@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == '/copperrun/iViews/adminPanel/index.php'){
+if ($_SERVER['REQUEST_URI'] == '/copperrun/plugins/adminPanel/index.php'){
     die("Not allowed back here!");
 }
 	if (isset($_POST['set'])){
@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/iViews/adminPanel/index.php'){
 	
 
     if ($choice == 'tvView') {
-        $source = 'tvFeed';
+        $source = 'tvView';
     }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
         $choice = 'runnerSearch';
         $itemSet = array();
@@ -28,12 +28,13 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/iViews/adminPanel/index.php'){
         if (isset($_POST['id']) && $_POST['id'] > 0) {
             # code...
             $id = $_POST['id'];
-            $source = 'rSearch&id='.$id;
+            $source = 'runnerSearch';
+            $option = 'id='.$id;
         }
-    }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Lboard') {
+    }elseif (isset($_GET['Search']) && $_GET['Search'] == 'Lboard') {
         # code...
         $choice = 'runnerSearch';
-        $source = 'Lboard';
+        $option = 'other=Lboard';
     }
     if (isset($_POST['setCat']) && $_POST['setCat'] == 'Submit') {
         # code...
