@@ -2,21 +2,12 @@
 if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
-switch($report){
-	
-	case 'missingRunners':
-	break;
-	
-	case 'twoMileResults':
-	break;
-	
-	case 'halfMileResults':
-	break;
-	
-	case 'tenKResults':
-	break;
-	
-	case 'editCatigories':
-		require 'raceCat.php';
-	break;
+if (isset($_GET['report'])) {
+	# code...
+	echo $_GET['report'];
+	$path = 'rViews/'.$_GET['report'];
+
+	if (is_dir($path)) {
+	        require $path.'/index.php';
+	    }
 }

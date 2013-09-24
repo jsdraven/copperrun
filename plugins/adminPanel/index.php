@@ -63,7 +63,7 @@ foreach (scandir('reports/rViews') as $key => $value) {
     if (strlen($value) < 3) {
         # code...
     }elseif (is_dir('reports/rViews/'.$value)) {
-        $reports .= "<input type='submit' name='reports' value='$value' />\n";
+        $reports .= "<input type='submit' name='report' value='$value' />\n";
     }
 }
 
