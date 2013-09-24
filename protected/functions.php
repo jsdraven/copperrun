@@ -12,8 +12,8 @@ $programingCredit = "<h3>And programing is brought to you by<br /> Mother Lode M
 **
 */
 //DB Settings, easy to find. 
-define('dbUser', 'root');
-define('dbPass', 'root');
+define('dbUser', 'copperrun');
+define('dbPass', 'copperrun');
 define('dbHost', 'localhost');
 
 function listing ($filler){
