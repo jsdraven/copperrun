@@ -1,5 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == '/copperrun/plugins/adminPanel/index.php'){
+if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
 	if (isset($_POST['set'])){

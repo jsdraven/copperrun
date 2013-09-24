@@ -1,6 +1,6 @@
 
 <?php
-if ($_SERVER['REQUEST_URI'] == '/copperrun/functions.php'){
+if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
 //var is set so to display credit on public sites.

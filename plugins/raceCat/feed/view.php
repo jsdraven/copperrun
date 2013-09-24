@@ -1,4 +1,7 @@
 <?php
+if (!isset($lock) || $lock != 'Key'){
+    die("Not allowed back here!");
+}
 echo "<form action='index.php' method='POST'>
 <table border=\"1\">
 	<tr>

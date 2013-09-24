@@ -1,8 +1,5 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == '/copperrun/feed/index.php'){
-    die("Not allowed back here!");
-}
-
+$lock = 'Key';
 require 'protected/functions.php';
 
 

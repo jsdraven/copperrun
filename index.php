@@ -1,11 +1,11 @@
 <?php
 $source = '';
 $body = "";
+$lock = 'Key';
 print_r($_POST);
 
 //the page with the collection of functions so to be used globally if needed.
 require 'protected/functions.php';
-
 if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
     //if it is the hosting computer they will be the only controlling admin with the panel giving them access to other features
     $path = 'plugins/adminPanel';

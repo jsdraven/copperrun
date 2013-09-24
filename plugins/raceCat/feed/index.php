@@ -1,4 +1,7 @@
 <?php
+if (!isset($lock) || $lock != 'Key'){
+    die("Not allowed back here!");
+}
 $date = date('Y');
 $sql = "SELECT * FROM raceCat WHERE year=$date";
 $results = DbConnection($sql);

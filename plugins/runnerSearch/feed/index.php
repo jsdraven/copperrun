@@ -1,4 +1,7 @@
 <?php
+if (!isset($lock) || $lock != 'Key'){
+    die("Not allowed back here!");
+}
 echo 'hi';
 if (isset($_GET['id']) && $_GET['id'] > 0) {
 	# code...

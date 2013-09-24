@@ -1,5 +1,7 @@
 <?php
-
+if (!isset($lock) || $lock != 'Key'){
+    die("Not allowed back here!");
+}
 $body .="
 	<table border=1 >
 		<tr>

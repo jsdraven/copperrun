@@ -1,6 +1,6 @@
 <?php
 //want plan text <<BACK NEXT>> at the bottom of the view.
-if ($_SERVER['REQUEST_URI'] == '/copperrun/runnerSearch.php'){
+if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
 $body .= "<h3>Runner Search</h3>";
