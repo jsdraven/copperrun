@@ -12,8 +12,8 @@ $programingCredit = "<h3>And programing is brought to you by<br /> Mother Lode M
 **
 */
 //DB Settings, easy to find. 
-define('dbUser', 'copperrun');
-define('dbPass', 'copperrun');
+define('dbUser', 'root');
+define('dbPass', '');
 define('dbHost', 'localhost');
 
 function listing ($filler){
@@ -40,20 +40,17 @@ function listing ($filler){
     return $filler_r;
 }
 function DbConnection($query){
-<<<<<<< HEAD
+
     $copperrun = mysqli_connect('localhost', 'root', '', 'copperrun');
-=======
+
     $DB_User = constant('dbUser');
     $DB_Password = constant('dbPass');
     $DB_Host = constant('dbHost');
-    $dbInfo['user'] = $DB_User;
-    $dbInfo['pw'] = $DB_Password;
-    $dbInfo['host'] = $DB_Host;
     $copperrun = mysqli_connect($DB_Host, $DB_User, $DB_Password);
->>>>>>> 2b16ebff3ccceac03d88f3540ec57968399be495
+
     $result = mysqli_query($copperrun, $query);
     mysqli_close($copperrun);
-    return $dbInfo;
+    return $result;
 }
 function timeToSeconds ($time){
     list($hours, $mins, $secs) = explode(':', $time);
