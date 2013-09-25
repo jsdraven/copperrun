@@ -4,11 +4,7 @@ if (!isset($lock) || $lock != 'Key'){
 }
 	if (isset($_POST['set'])){
 		$choice = $_POST['set'];
-	}elseif (isset($_POST['reports'])){
-		$choice = 'reports';
-		$report = $_POST['reports'];
-	}
-	
+	}	
 
     if ($choice == 'tvView') {
         $source = 'tvView';
@@ -50,19 +46,12 @@ if (!isset($lock) || $lock != 'Key'){
     $reports = '';
 foreach (scandir('plugins') as $key => $value) {
     # code...
-    if (strlen($value) < 3 || $value == 'adminPanel') {
+    if (strlen($value) < 3 || $value == 'adminPanel' || $value == 'dataPanel' || $value == 'tvView' || $value == 'runnerSearch') {
         # code...
     }elseif (is_dir('plugins/'.$value)) {
         $views .= "<input type=\"submit\" name='set' value='$value' />\n";
     }
 }
-foreach (scandir('reports/rViews') as $key => $value) {
-    # code...
-    if (strlen($value) < 3) {
-        # code...
-    }elseif (is_dir('reports/rViews/'.$value)) {
-        $reports .= "<input type='submit' name='report' value='$value' />\n";
-    }
-}
+
 
 require "view.php";

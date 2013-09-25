@@ -23,6 +23,7 @@ $body .="
 	</option>
 </select>
 <input type='submit' name='fLine' value='Submit' tabindex='4' />
+<input type='hidden' name='form' value='finishLine'/>
 </form>
 
 ";

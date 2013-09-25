@@ -8,13 +8,28 @@ print_r($_POST);
 require 'protected/functions.php';
 if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
     //if it is the hosting computer they will be the only controlling admin with the panel giving them access to other features
-    $path = 'plugins/adminPanel';
-    require $path."/index.php";
-    echo $path;
-    require "plugins/$choice/index.php";
+    
+    require "plugins/adminPanel/index.php";
+    $path = 'landing.php';
+    if (isset($choice)) {
+        # code...
+        $path = "plugins/$choice/index.php";
+    }
+    if (isset($_POST['form'])) {
+        # code...
+        $form = $_POST['form'];
+        $path = "plugins/$form/index.php";
+    }
+    require $path;
 }elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.10') {
     //data entry IP is the only other computer with access to data entry not controlling at all
-    $path = 'plugins/runners';
+    require 'plugins/dataPanel/index.php';
+    $path = 'landing.php';
+    if (isset($_POST['form'])) {
+        # code...
+        $form = $_POST['form'];
+        $path = "plugins/$form/index.php";
+    }
     require $path;
 }elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.114') {
     //TV Feed only IP to the TV Feed. May open up to others later as another page options. Down side you cannot make it mobile friendly very easy.
@@ -26,8 +41,6 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
     $path = 'plugins/runnerSearch/index.php';
     require $path;    
 }
-
-echo $source;
 ?>
 <!DOCTYPE html>
 <html>
