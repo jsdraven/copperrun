@@ -1,6 +1,6 @@
 <?php
 //want plan text <<BACK NEXT>> at the bottom of the view.
-if ($_SERVER['REQUEST_URI'] == '/copperrun/runnerSearch.php'){
+if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
 $body .= "<h3>Runner Search</h3>";
@@ -31,7 +31,8 @@ if (!isset($_POST['resultChoice']) && isset($itemSet)) {
 }elseif (isset($_POST['resultChoice'])) {
         # here is were source is set
         $resultChoice = $_POST['resultChoice'];
-        $source = 'rSearch&id='.$resultChoice;
+        $source = 'runnerSearch';
+        $option = 'id='.$resultChoice;
         $rInfo = getRinfo($resultChoice);
         $name = $rInfo['fname'];
         $bib = $rInfo['bib'];

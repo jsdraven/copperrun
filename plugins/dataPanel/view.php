@@ -1,5 +1,7 @@
 <?php
-
+if (!isset($lock) || $lock != 'Key'){
+    die("Not allowed back here!");
+}
 $body .="
 	<table border=1 >
 		<tr>
@@ -8,10 +10,6 @@ $body .="
 					$views
 				</form>
 			</td>
-			<td>
-				<form action='index.php' method='POST'>
-					$reports
-				</td>
 		</tr>
 	</table>
 ";

@@ -1,19 +1,13 @@
 <?php
-if ($_SERVER['REQUEST_URI'] == '/copperrun/iViews/adminPanel/index.php'){
+if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
 	if (isset($_POST['set'])){
 		$choice = $_POST['set'];
-	}elseif (isset($_POST['reports'])){
-		$choice = 'reports';
-		$report = $_POST['reports'];
-	}else{
-		$choice = 'runnerRegi';
-	}
-	
+	}	
 
     if ($choice == 'tvView') {
-        $source = 'tvFeed';
+        $source = 'tvView';
     }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
         $choice = 'runnerSearch';
         $itemSet = array();
@@ -28,12 +22,13 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/iViews/adminPanel/index.php'){
         if (isset($_POST['id']) && $_POST['id'] > 0) {
             # code...
             $id = $_POST['id'];
-            $source = 'rSearch&id='.$id;
+            $source = 'runnerSearch';
+            $option = 'id='.$id;
         }
-    }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Lboard') {
+    }elseif (isset($_GET['Search']) && $_GET['Search'] == 'Lboard') {
         # code...
         $choice = 'runnerSearch';
-        $source = 'Lboard';
+        $option = 'other=Lboard';
     }
     if (isset($_POST['setCat']) && $_POST['setCat'] == 'Submit') {
         # code...
@@ -49,21 +44,14 @@ if ($_SERVER['REQUEST_URI'] == '/copperrun/iViews/adminPanel/index.php'){
     }
     $views = '';
     $reports = '';
-foreach (scandir('iviews') as $key => $value) {
+foreach (scandir('plugins') as $key => $value) {
     # code...
-    if (strlen($value) < 3 || $value == 'adminPanel') {
+    if (strlen($value) < 3 || $value == 'adminPanel' || $value == 'dataPanel' || $value == 'tvView' || $value == 'runnerSearch') {
         # code...
-    }elseif (is_dir('iviews/'.$value)) {
+    }elseif (is_dir('plugins/'.$value)) {
         $views .= "<input type=\"submit\" name='set' value='$value' />\n";
     }
 }
-foreach (scandir('reports/rViews') as $key => $value) {
-    # code...
-    if (strlen($value) < 3) {
-        # code...
-    }elseif (is_dir('reports/rViews/'.$value)) {
-        $reports .= "<input type='submit' name='reports' value='$value' />\n";
-    }
-}
+
 
 require "view.php";
