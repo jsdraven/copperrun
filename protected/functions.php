@@ -89,6 +89,7 @@ function raceCatArray(){
     $result1 = DbConnection($query1);
     //I need to stack each age range into sepporate arrays per race type/gender.
     //Knowing the race type I could search 
+    $testing = '';
     foreach ($result1 as $key => $value) {
         # code...
         if ($key == 'TwoMileF' || $key == 'HalfMileF' || $key == 'TenKF') {
@@ -104,10 +105,11 @@ function raceCatArray(){
         $ageRange = explode('-', $value)
         $ageStart = $ageRange['0'];
         $ageStop = $ageRange['1'];
-        $sql = "SELECT * FROM \`runners\` WHERE $type > 0 And Gender == $gender AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
+        $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = \'$gender\' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
+        $testing .= $sql.'\n<br />\n';
     }
 
-    return $group;
+    return $testing;
 }
 function getRinfo($id){
     $items['fname'] = 'Jim';
