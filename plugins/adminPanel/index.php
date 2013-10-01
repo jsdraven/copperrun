@@ -1,16 +1,16 @@
 <?php
+
 if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
 	if (isset($_POST['set'])){
 		$choice = $_POST['set'];
 	}elseif (isset($_POST['reports'])){
-		$choice = 'reports';
 		$report = $_POST['reports'];
 	}
 	
 
-    if ($choice == 'tvView') {
+    if (isset($choice) && $choice == 'tvView') {
         $source = 'tvView';
     }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Search') {
         $choice = 'runnerSearch';
@@ -42,7 +42,7 @@ if (!isset($lock) || $lock != 'Key'){
         $list['gender'] = $_POST['gen'];
         $choice = 'raceCat';
         $source = 'raceCat';
-    }elseif ($choice == 'raceCat') {
+    }elseif (isset($choice) && $choice == 'raceCat') {
         # code...
         $source = 'raceCat';
     }
@@ -50,10 +50,10 @@ if (!isset($lock) || $lock != 'Key'){
     $reports = '';
 foreach (scandir('plugins') as $key => $value) {
     # code...
-    if (strlen($value) < 3 || $value == 'adminPanel') {
+    if (strlen($value) < 3 || $value == 'adminPanel' || $value == 'dataPanel') {
         # code...
     }elseif (is_dir('plugins/'.$value)) {
-        $views .= "<input type=\"submit\" name='set' value='$value' />\n";
+        $views .= "<input type='submit' name='set' value='$value' />\n";
     }
 }
 foreach (scandir('reports/rViews') as $key => $value) {

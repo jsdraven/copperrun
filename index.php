@@ -15,6 +15,11 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
         # code...
         $path = "plugins/$choice/index.php";
     }
+    if (isset($_POST['report'])) {
+        # code...
+        $report = $_POST['report'];
+        $path = "reports/index.php";
+    }
     if (isset($_POST['form'])) {
         # code...
         $form = $_POST['form'];

@@ -12,18 +12,19 @@ $body .="
 	<option>
 		Choose one..
 	</option>
-	<option value='half'>
+	<option value='half'$half>
 		Half Mile
 	</option>
-	<option value='tenk'>
+	<option value='tenk'$tenk>
 		Ten K
 	</option>
-	<option value='two'>
+	<option value='two'$two>
 		Two Mile
 	</option>
 </select>
 <input type='submit' name='fLine' value='Submit' tabindex='4' />
 <input type='hidden' name='form' value='finishLine'/>
 </form>
-
+$lastSubmit
+$error
 ";
