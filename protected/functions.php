@@ -15,6 +15,7 @@ $programingCredit = "<h3>And programing is brought to you by<br /> Mother Lode M
 define('dbUser', 'copperrun');
 define('dbPass', 'copperrun');
 define('dbHost', 'localhost');
+define('dbname', 'copperrun');
 
 function listing ($filler){
     $filler_r = '';
@@ -44,7 +45,8 @@ function DbConnection($query){
     $DB_User = constant('dbUser');
     $DB_Password = constant('dbPass');
     $DB_Host = constant('dbHost');
-    $copperrun = mysqli_connect($DB_Host, $DB_User, $DB_Password, 'copperrun');
+    $DB_Name = constant('dbname');
+    $copperrun = mysqli_connect($DB_Host, $DB_User, $DB_Password, $DB_Name);
     $result = mysqli_query($copperrun, $query);
     mysqli_close($copperrun);
     return $result;
@@ -102,7 +104,7 @@ function raceCatArray(){
             $type = $typeParts['0'];
             $gender = 'M';
         }
-        $ageRange = explode('-', $value)
+        $ageRange = explode('-', $value);
         $ageStart = $ageRange['0'];
         $ageStop = $ageRange['1'];
         $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = \'$gender\' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
