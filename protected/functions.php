@@ -167,6 +167,41 @@ function rFeed($id){
 
     return $info;
 }
+function formProcessor($post, $form){
+    /*$form is an array. We will have the key the field name and true or false if it is required. 
+    We will need to have a standardization of field names if we are to fully check the data for the required content like name is all letters an age is number etc.
+    This function will return an array with errors and items values clean and original? I think I may just translate the htmlspecialchars before human readable.
+
+    */
+
+
+
+    $items = array();
+    $errors = array();
+    foreach ($form as $key => $value) {
+        # code...
+        if ($value == 'true' || !isset($post[$key])) {
+            # code...
+            $errors[$key] = 'is required.';
+        }else{
+            switch ($key) {
+                case 'fname':
+                    # code...
+                        //here we will make sure content is what we want
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            $trimed = trim($post[$key]);
+            $stripped = stripcslashes($trimed);
+            $clean = htmlspecialchars($stripped);
+            $items[$key] = $clean;
+        }
+    }
+    
+}
 function rSearchList($items){
 /*
 Process for this
