@@ -87,7 +87,7 @@ function publishListing ($filler, $type, $count){
 function raceCatArray(){
     //i will create an array based on stored age ranges for each gender. $Array=>raceType=>Gender=>ageRange=>RacerList.
     $year = date('Y');
-    $query1 = 'SELECT * FROM raceCat WHERE year == '.$year;
+    $query1 = 'SELECT * FROM raceCat WHERE year = '.$year;
     $result1 = DbConnection($query1);
     //I need to stack each age range into sepporate arrays per race type/gender.
     //Knowing the race type I could search 
