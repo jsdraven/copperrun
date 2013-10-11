@@ -167,6 +167,53 @@ function rFeed($id){
 
     return $info;
 }
+function formProcessor($post, $form){
+    /*$form is an array. We will have the key the field name and true or false if it is required. 
+    We will need to have a standardization of field names if we are to fully check the data for the required content like name is all letters an age is number etc.
+    This function will return an array with errors and items values clean and original? I think I may just translate the htmlspecialchars before human readable.
+
+    */
+    //set the arrays for output
+    $items = array();
+    $errors = array();
+
+    //we are using the list supplied at the form to process the POST array.
+    foreach ($form as $key => $value) {
+        # If the form field is required and is not found in the post then we will send error.
+        if ($value == 'true' && !isset($post[$key])) {
+            # code...
+            $errors[$key] = 'is required.';
+
+            //else we will move onto the next round of checking data and cleaning
+        }elseif (isset($post[$key])) {
+            # code...
+            //Since there might be a time for optional info we will need to see if it was sent after all before we work it.
+            //switch case is why we need to know ahead of time the possible field names for their associated types.
+            //I will use the field name as the case selecter then within each handle the data accordingly.
+            switch ($key) {
+                case 'fname':
+                    # code...
+                        //here we will make sure content is what we want
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+            //even though someone trying to send in hacking stuff may not pass our above checks I want to sanatize it anyway just in case.
+            //trimed is removing newlines. extra spaces and that sort. stripslashes is doing just that removing slashes so they cannot interup our code for cross site scripts.
+            //htmlspecialchars is turning everything that could be interperted by the browser as html code and turning it into plain text that will not run as code. this could 
+            //be converted back into human readable later if we choose if there is an error so they dont have to fill out the hole form again. I am half tempted to check if this 
+            //does need to be done and error on it.
+            $trimed = trim($post[$key]);
+            $stripped = stripcslashes($trimed);
+            $clean = htmlspecialchars($stripped);
+            //We send back the sanatized content from the POST data so we can do what we will with it.
+            $items[$key] = $clean;
+        }
+    }
+    
+}
 function rSearchList($items){
 /*
 Process for this
