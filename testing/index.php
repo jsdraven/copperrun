@@ -16,6 +16,7 @@ function DbConnection($query){
     mysqli_close($copperrun);
     return $result;
 
+
 }
 
 function raceCatArray(){
@@ -24,33 +25,20 @@ function raceCatArray(){
     $query1 = 'SELECT * FROM raceCat WHERE year = '.$year;
     $result1 = DbConnection($query1);
     //I need to stack each age range into sepporate arrays per race type/gender.
-    //Knowing the race type I could search 
-    $testing = '';
-    foreach ($result1 as $key => $value) {
-        # code...
-        if ($key == 'TwoMileF' || $key == 'HalfMileF' || $key == 'TenKF') {
-            # code...
-            $typeParts = explode('F', $key);
-            $type = $typeParts['0'];
-            $gender = "F";
-        }else{
-            $typeParts = explode("M", $key);
-            $type = $typeParts['0'];
-            $gender = 'M';
-        }
-        if (isset($value)) {
-        	# code...
-        	$testing .= $key.'='.$value.'<br />';
-/*        $ageRange = explode('-', $value);
-        $ageStart = $ageRange['0'];
-        $ageStop = $ageRange['1'];
-        $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = \'$gender\' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
-        $testing .= $sql.'\n<br />\n';*/
-        }
-        
-    }
+    //Knowing the race type I could search
+    $items = array();
+    while ($row = mysqli_fetch_array($result1)) {
+     	# code...
+     	foreach ($row as $key => $value) {
+     		# code...
+	 		if (strlen($value) > 0) {
+	 			# code...
+	 			$items[$key][] = $value;
+	 		}	
+     	}
+    } 
 
-    return $testing;
+    return $items;
 }
 $result = raceCatArray();
 
