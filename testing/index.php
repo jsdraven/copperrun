@@ -40,7 +40,7 @@ function raceCatArray(){
         }
         if (isset($value)) {
         	# code...
-        	$testing .= $key.'\n';
+        	$testing .= $key.'='.$value.'<br />';
 /*        $ageRange = explode('-', $value);
         $ageStart = $ageRange['0'];
         $ageStop = $ageRange['1'];
