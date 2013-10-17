@@ -27,19 +27,43 @@ function raceCatArray(){
     //I need to stack each age range into sepporate arrays per race type/gender.
     //Knowing the race type I could search
     $items = array();
-    while ($row = mysqli_fetch_array($result1)) {
+    while ($row = mysqli_fetch_assoc($result1)) {
      	# code...
      	foreach ($row as $key => $value) {
      		# code...
-	 		if (strlen($value) > 0) {
+	 		if (strlen($value) > 0 && $key != 'id' && $key != 'year') {
 	 			# code...
 	 			$items[$key][] = $value;
 	 		}	
      	}
     } 
-
-    return $items;
+    $testing = '';
+    foreach ($items as $key => $part) {
+            # code...
+            $types = $key;
+        foreach ($part as $key => $value) {
+            # code...
+            if ($types == 'TwoMileF' || $types == 'HalfMileF' || $types == 'TenKF') {
+                # code...
+                $typeParts = explode('F', $types);
+                $type = $typeParts['0'];
+                $gender = "F";
+            }else{
+                $typeParts = explode("M", $types);
+                $type = $typeParts['0'];
+                $gender = 'M';
+            }
+            $ageRange = explode('-', $value);
+            $ageStart = $ageRange['0'];
+            $ageStop = $ageRange['1'];
+            $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = \'$gender\' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
+            $testing .= $sql.'\n<br />\n';
+        }
+            
+    }
+    return $testing;
 }
 $result = raceCatArray();
-
+echo "<pre>\n";
 print_r($result);
+echo "</pre>";
