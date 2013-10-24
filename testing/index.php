@@ -56,10 +56,11 @@ function raceCatArray(){
             $ageRange = explode('-', $value);
             $ageStart = $ageRange['0'];
             $ageStop = $ageRange['1'];
-            $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = \'$gender\' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
-            $testing .= $sql.'\n<br />\n';
-        }
+            $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = '$gender' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
             
+
+            
+        }            
     }
     return $testing;
 }

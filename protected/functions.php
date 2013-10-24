@@ -84,7 +84,7 @@ function publishListing ($filler, $type, $count){
     $filler_r .= "</table>\n";
     return $filler_r;
 }
-function raceCatArray(){
+/*function raceCatArray(){
     //i will create an array based on stored age ranges for each gender. $Array=>raceType=>Gender=>ageRange=>RacerList.
     $year = date('Y');
     $query1 = 'SELECT * FROM raceCat WHERE year = '.$year;
@@ -112,7 +112,7 @@ function raceCatArray(){
     }
 
     return $testing;
-}
+}*/
 function getRinfo($id){
     $items['fname'] = 'Jim';
     $items['bib'] = 110;

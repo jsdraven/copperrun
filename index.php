@@ -46,8 +46,8 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
     $path = 'plugins/runnerSearch/index.php';
     require $path;    
 }
-$testing = raceCatArray();
-print_r($testing);
+//$testing = raceCatArray();
+//print_r($testing);
 ?>
 <!DOCTYPE html>
 <html>
