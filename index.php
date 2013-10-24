@@ -2,7 +2,7 @@
 $source = '';
 $body = "";
 $lock = 'Key';
-print_r($_POST);
+//print_r($_POST);
 
 //the page with the collection of functions so to be used globally if needed.
 require 'protected/functions.php';
@@ -52,6 +52,7 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
 <!DOCTYPE html>
 <html>
     <head>
+        <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
         <script>
             function loadXMLDoc()
             {
@@ -70,6 +71,7 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
             }
             setInterval("loadXMLDoc();", 1000);
         </script>
+
     </head>
     <body>
 
