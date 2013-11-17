@@ -3,8 +3,16 @@
 if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
-$body .= "<h3>Runner Search</h3>";
 
+$body .= "<h3>Runner Search</h3>";
+if (isset($_POST['bnumber'])) {
+    # code...
+    $itemSet['bib'] = $_POST['bnumber'];
+}
+if (isset($_POST['fname'])) {
+    # code...
+    $itemSet['fname'] = $_POST['fname'];
+}
 if (!isset($_POST['resultChoice']) && isset($itemSet)) {
         # code...
         $results = rSearchList($itemSet);
@@ -16,7 +24,7 @@ if (!isset($_POST['resultChoice']) && isset($itemSet)) {
                 $rows .= "<tr><td align='center'><label>$Fname - $bib <input type='submit' style='display: none;' name='resultChoice' value='$ID' /></label></td></tr>\n";
         }
         $body .=" 
-                <form action='index.php' method='POST'>
+                <form action='' method='POST'>
                 <input type='hidden' name='Search' value='Search' />
                         <table border='1'>
 
@@ -40,7 +48,7 @@ if (!isset($_POST['resultChoice']) && isset($itemSet)) {
 $programingCredit
 
         <div id='myDiv'>One moment while I fetch your information.</div>
-            <form action='index.php'>
+            <form action=''>
                 <label>Search Again<input style='display: none;' type='submit' /></label>
                 </form>
 
@@ -48,7 +56,7 @@ $programingCredit
 }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Lboard') {
     # code...
     $body .="<div id='myDiv'>One moment while I fetch your information.</div>
-        <form action='index.php'>
+        <form action=''>
         <label>Back to Search<input type='submit' hidden='true' /></label>
         </form>
     ";
@@ -57,7 +65,7 @@ $programingCredit
         $body .="
 $programingCredit
 
-                <form action='index.php' method='POST'>
+                <form action='' method='POST'>
         <table>
                 <tr>
                         <td>

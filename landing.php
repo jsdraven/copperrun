@@ -2,5 +2,5 @@
 $body .="
 Hello there. 
 <p>
-Lets get to work shale we?
+Lets get to work shall we?
 ";
