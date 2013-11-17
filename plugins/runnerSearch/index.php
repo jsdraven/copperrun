@@ -13,7 +13,7 @@ if (!isset($_POST['resultChoice']) && isset($itemSet)) {
                 $Fname = $results[$i]['fname'];
                 $bib = $results[$i]['bib'];
                 $ID = $results[$i]['id'];
-                $rows .= "<tr><td align='center'><label>$Fname - $bib <input type='submit' hidden='true' name='resultChoice' value='$ID' /></label></td></tr>\n";
+                $rows .= "<tr><td align='center'><label>$Fname - $bib <input type='submit' style='display: none;' name='resultChoice' value='$ID' /></label></td></tr>\n";
         }
         $body .=" 
                 <form action='index.php' method='POST'>

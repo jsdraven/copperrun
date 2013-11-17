@@ -17,13 +17,13 @@ foreach ($results as $key => $value) {
 		# code...
 		$type = 'TwoMileF';
 		$item = $value[$type];
-		$twomilef .= "<tr><td><label>$item<input type='submit' hidden='true' name='$type' value='$item'></label></td></tr>\n";
+		$twomilef .= "<tr><td><label>$item<input type='submit' style='display: none;' name='$type' value='$item'></label></td></tr>\n";
 	}
 	if (strlen($value['TwoMileM']) > 0) {
 		# code...
 		$type = 'TwoMileM';
 		$item = $value[$type];
-		$twomilem .= "<tr><td><label>$item<input type='submit' hidden='true' name='$type' value='$item'></label></td></tr>\n";				
+		$twomilem .= "<tr><td><label>$item<input type='submit' style='display: none;' name='$type' value='$item'></label></td></tr>\n";				
 	}
 	if (strlen($value['HalfMileF']) > 0) {
 		# code...
