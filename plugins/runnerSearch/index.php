@@ -41,7 +41,7 @@ $programingCredit
 
         <div id='myDiv'>One moment while I fetch your information.</div>
             <form action='index.php'>
-                <label>Search Again<input hidden='true' type='submit' /></label>
+                <label>Search Again<input style='display: none;' type='submit' /></label>
                 </form>
 
 ";
@@ -76,7 +76,7 @@ $programingCredit
                 </tr>
                 <tr>
                         <td>
-                                <label>Search<input type='submit' hidden='true' name='Search' value='Search' /></label> -- or -- <label>Category Leaders<input type='submit' hidden='true' name='Search' value='Lboard' /></label>
+                                <label>Search<input type='submit' style='display: none;' name='Search' value='Search' /></label> -- or -- <label>Category Leaders<input type='submit' style='display: none;' name='Search' value='Lboard' /></label>
                         </td>
                 </tr>
         </table>

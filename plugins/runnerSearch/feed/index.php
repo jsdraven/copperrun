@@ -20,17 +20,22 @@ echo "<p>Your overall place is $oPlace.</ br> Your place in catigory is $cPlace<
 ?>
 <p>
 <table>
-<tr>
-	<td>
-		Name
-	</td>
-	<td>
-		Bib
-	</td>
-	<td>
-		Time
-	</td>
-</tr>
+	<thead>
+		<tr>
+			<td>
+				Place
+			<td>
+				Name
+			</td>
+			<td>
+				Bib
+			</td>
+			<td>
+				Time
+			</td>
+		</tr>
+	</thead>
+	<tbody>
 <?php
 for ($i=0; $i < $count; $i++) { 
 	# code...
@@ -48,6 +53,7 @@ for ($i=0; $i < $count; $i++) {
 	
 }
 ?>
+	</tbody>
 </table>
 <?php
 //I will need to format the data with a foreach after I pop the place key from the array only leaving the racers list.
