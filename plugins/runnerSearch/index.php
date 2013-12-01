@@ -13,9 +13,26 @@ if (isset($_POST['fname'])) {
     # code...
     $itemSet['fname'] = $_POST['fname'];
 }
+print_r($itemSet);
 if (!isset($_POST['resultChoice']) && isset($itemSet)) {
         # code...
         $results = rSearchList($itemSet);
+        print_r($results);
+        if (array_key_exists('bib', $results)) {
+            # code...
+           $source = $results['bib']['source'];
+           $option = $results['bib']['option'];
+           $body .="
+$programingCredit
+
+        <div id='myDiv'>One moment while I fetch your information.</div>
+            <form action=''>
+                <label>Search Again<input style='display: none;' type='submit' /></label>
+                </form>
+
+";
+        }else{
+
         $rows = "";
         for ($i=0; $i < 5; $i++) {
                 $Fname = $results[$i]['fname'];
@@ -36,14 +53,13 @@ if (!isset($_POST['resultChoice']) && isset($itemSet)) {
                                 $rows
                         </table>
  ";
+}
 }elseif (isset($_POST['resultChoice'])) {
         # here is were source is set
         $resultChoice = $_POST['resultChoice'];
         $source = 'runnerSearch';
         $option = 'id='.$resultChoice;
-        $rInfo = getRinfo($resultChoice);
-        $name = $rInfo['fname'];
-        $bib = $rInfo['bib'];
+
                 $body .="
 $programingCredit
 

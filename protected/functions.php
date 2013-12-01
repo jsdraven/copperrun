@@ -223,7 +223,11 @@ Process for this
 4) build array id, fname, bib. Must also include original search fname for using with more list option. 
 */
 //Jim is the name we used to test with targeted bib 110. cannot use 123, 124, 116, 128.
-
+if (isset($items['bib'])) {
+    # code...
+    $list['bib']['source'] = 'runnerSearch';
+    $list['bib']['option'] = 'id='.$items['bib'];
+}else{
 $list = array();
 
 $list['0']['fname'] = 'Jim';
@@ -245,6 +249,7 @@ $list['3']['id'] = 128;
 $list['4']['fname'] = 'Jim';
 $list['4']['bib'] = 101;
 $list['4']['id'] = 9;
+}
 
 return $list;
 }
