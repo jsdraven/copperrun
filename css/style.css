@@ -91,7 +91,7 @@ audio:not([controls]) {
 svg:not(:root) {
   overflow: hidden; }
 
-button, input, textarea {
+/*button, input, textarea {
   border: 0;
   font-family: inherit;
   font-size: 100%;
@@ -101,7 +101,7 @@ button, input, textarea {
 
 button, html input[type='button'], input[type='reset'], input[type='submit'] {
   cursor: pointer;
-  -webkit-appearance: button; }
+  -webkit-appearance: button; }*/
 
 input[type='search'] {
   -webkit-appearance: textfield; }

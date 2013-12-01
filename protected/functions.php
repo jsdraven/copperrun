@@ -119,19 +119,22 @@ function getRinfo($id){
 
     return $items;
 }
-function rFeed($id){
+function rFeed($id=10){
 //here is where the the array will be built. I will also need to include a key for current place and its value.
     //first value in the array must be the racer's current place.
     $info = array();
 
 /*process list
 1) select * from db where ID is ID
-2) user other function to create arrays for searching to find placement and IDs
-3) sort by fastest to slowest within the defined group.
-4) if ID current place is 1 or 2 then truncate array to 4 not 5.
-5) select all needed from db to start return array ID, fname, bib, time , their place
+2) Test for possible place
+3) if not placed then report racer not placed or has not been reported yet.
+    a) I may want to report who is first as a place holder until required data is in the db.
+4) I can do a while for gathering the other places and putting them into an arra.
+5) I will need to use another function for checking place wihtin the catigory and not just over all.
 */
-    $info['oPlace'] = 6;
+    $sql = "SELECT * FROM runners WHERE id = $id";
+    $result = DbConnection($sql);
+   /* $info['oPlace'] = 6;
     $info['cPlace'] = 2;
 
     //below is a pre-built array for testing and place holding.
@@ -163,7 +166,7 @@ function rFeed($id){
     $info['4']['fname'] = "John";
     $info['4']['bib'] = 128;
     $info['4']['time'] = '1:16:01.23';
-    $info['4']['cPlace'] = 5;
+    $info['4']['cPlace'] = 5;*/
 
     return $info;
 }
@@ -230,7 +233,17 @@ if (isset($items['bib'])) {
 }else{
 $list = array();
 
-$list['0']['fname'] = 'Jim';
+$sql = "SELECT * FROM runners WHERE FName LIKE $items['fname']";
+$result = DbConnection($sql);
+
+/*foreach ($result as $key => $value) {
+    # code...
+    $list[]['fname'] = 'Jim';
+    $list[]['bib'] = 119;
+    $list[]['id'] = 32;
+}*/
+
+/*$list['0']['fname'] = 'Jim';
 $list['0']['bib'] = 119;
 $list['0']['id'] = 32;
 
@@ -249,7 +262,7 @@ $list['3']['id'] = 128;
 $list['4']['fname'] = 'Jim';
 $list['4']['bib'] = 101;
 $list['4']['id'] = 9;
-}
+}*/
 
-return $list;
+return $result;
 }
