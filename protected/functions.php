@@ -84,35 +84,53 @@ function publishListing ($filler, $type, $count){
     $filler_r .= "</table>\n";
     return $filler_r;
 }
-/*function raceCatArray(){
+function raceCatArray(){
     //i will create an array based on stored age ranges for each gender. $Array=>raceType=>Gender=>ageRange=>RacerList.
     $year = date('Y');
     $query1 = 'SELECT * FROM raceCat WHERE year = '.$year;
     $result1 = DbConnection($query1);
     //I need to stack each age range into sepporate arrays per race type/gender.
-    //Knowing the race type I could search 
-    $testing = '';
-    foreach ($result1 as $key => $value) {
+    //Knowing the race type I could search
+    $items = array();
+    while ($row = mysqli_fetch_assoc($result1)) {
         # code...
-        if ($key == 'TwoMileF' || $key == 'HalfMileF' || $key == 'TenKF') {
+        foreach ($row as $key => $value) {
             # code...
-            $typeParts = explode('F', $key);
-            $type = $typeParts['0'];
-            $gender = "F";
-        }else{
-            $typeParts = explode("M", $key);
-            $type = $typeParts['0'];
-            $gender = 'M';
+            if (strlen($value) > 0 && $key != 'id' && $key != 'year') {
+                # code...
+                $items[$key][] = $value;
+            }   
         }
-        $ageRange = explode('-', $value);
-        $ageStart = $ageRange['0'];
-        $ageStop = $ageRange['1'];
-        $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = \'$gender\' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
-        $testing .= $sql.'\n<br />\n';
     }
 
-    return $testing;
-}*/
+    $raceListings = array();
+    foreach ($items as $key => $part) {
+            # code...
+            $types = $key;
+        foreach ($part as $key => $value) {
+            # code...
+            $strCount = strlen($types) -1;
+            $typeParts = str_split($types, $strCount);
+            $type = $typeParts['0'];
+            $gender = $typeParts['1'];
+            $ageRange = explode('-', $value);
+            $ageStart = $ageRange['0'];
+            $ageStop = $ageRange['1'];
+            $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = '$gender' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
+            
+            $result = DbConnection($sql);
+            $records = mysqli_num_rows($result);
+            for ($i=0; $i < $records; $i++) { 
+                # code...
+                $row = mysqli_fetch_assoc($result);
+                $raceListings[$type][$gender][$value][] = $row;
+                mysqli_field_seek($result, $i);
+            }
+            mysqli_free_result($result);  
+        }            
+    }
+    return $raceListings;
+}
 function getRinfo($id){
     $items['fname'] = 'Jim';
     $items['bib'] = 110;
@@ -226,43 +244,39 @@ Process for this
 4) build array id, fname, bib. Must also include original search fname for using with more list option. 
 */
 //Jim is the name we used to test with targeted bib 110. cannot use 123, 124, 116, 128.
-if (isset($items['bib'])) {
-    # code...
-    $list['bib']['source'] = 'runnerSearch';
-    $list['bib']['option'] = 'id='.$items['bib'];
-}else{
-$list = array();
+    $list = array();
 
-$sql = "SELECT * FROM runners WHERE FName LIKE $items['fname']";
-$result = DbConnection($sql);
+    if (isset($items['bib'])) {
+        # code...
+        $list['bib']['source'] = 'runnerSearch';
 
-/*foreach ($result as $key => $value) {
-    # code...
-    $list[]['fname'] = 'Jim';
-    $list[]['bib'] = 119;
-    $list[]['id'] = 32;
-}*/
 
-/*$list['0']['fname'] = 'Jim';
-$list['0']['bib'] = 119;
-$list['0']['id'] = 32;
+        $bib = $items['bib'];
+        $sql = "SELECT * FROM runners WHERE Bib = '$bib'"; 
+        $result = DbConnection($sql);
+        $object = mysqli_fetch_object($result);
+        $list['bib']['option'] = 'id='.$object->id;
 
-$list['1']['fname'] = 'Jim';
-$list['1']['bib'] = 135;
-$list['1']['id'] = 68;
 
-$list['2']['fname'] = 'Jim';
-$list['2']['bib'] = 104;
-$list['2']['id'] = 12;
+    }else{
+        
+        $fname = $items['fname'];
+        $sql = "SELECT * FROM runners WHERE FName LIKE '$fname'";
+        $result = DbConnection($sql);
 
-$list['3']['fname'] = 'Jim';
-$list['3']['bib'] = 110;
-$list['3']['id'] = 128;
+            $records = mysqli_num_rows($result);
 
-$list['4']['fname'] = 'Jim';
-$list['4']['bib'] = 101;
-$list['4']['id'] = 9;
-}*/
+            for ($i=0; $i < $records; $i++) { 
+                # code...
+                $row = mysqli_fetch_assoc($result);
+                $list[] = $row;
+                mysqli_field_seek($result, $i);
+            }
+            mysqli_free_result($result);
 
-return $result;
 }
+
+
+return $list;
+}
+
