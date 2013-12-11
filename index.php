@@ -36,7 +36,7 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
         $path = "plugins/$form/index.php";
     }
     require $path;
-}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.114') {
+}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.105') {
     //TV Feed only IP to the TV Feed. May open up to others later as another page options. Down side you cannot make it mobile friendly very easy.
     $source = 'plugins/tvView/feed';
     $path = 'plugins/tvView/index.php';

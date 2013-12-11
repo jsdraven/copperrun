@@ -21,5 +21,26 @@ if (!isset($lock) || $lock != 'Key'){
 
 			</tbody>
 		</table>
+		<pre>
+<?php 
+$tvData=raceCatArray(); 
+$type='TenK';
+$gender='F';
+echo "$type ---- $gender\n";
+$ranking=array();
+foreach ($tvData[$type][$gender] as $entries) {
+	$tempdata = $entries;
+	foreach ($tempdata as $runnerinfo) {
+		$ranking[] = $runnerinfo[$type].','.$runnerinfo['FName'].','.$runnerinfo['LName'];
+//		echo $runnerinfo[$type].','.$runnerinfo['FName'].','.$runnerinfo['LName'];
+	}
+	sort($ranking);
+	foreach ($ranking as $runners) {
+		echo $runners . "\n";
+	}
+}
+
+?>
+		</pre>
 	</body>
 </html>
