@@ -8,39 +8,69 @@ if (!isset($lock) || $lock != 'Key'){
 
 	</header>
 	<body>
-		<table width="100%">
+<?php
+$races=array('TenK','TwoMile','HalfMile');
+
+foreach ($races as $currentRace) {
+	$fRanking=displayTableResults($currentRace, 'F');
+
+?>
+		<table style="width: 450px; float: left;">
 			<thead>
 				<tr>
-					<td colspan="2">Half Mile</td><td colspan="2">Two Mile</td><td colspan="2">10K</td>
+					<td colspan="3"><?php echo $currentRace; ?> - Female</td>
 				</tr>
 				<tr>
-					<td>Male</td><td>Female</td><td>Male</td><td>Female</td><td>Male</td><td>Female</td>
+					<td style="width: 80px;">Time</td><td style="width:70px">Bib</td><td>Name</td>
 				</tr>
 			</thead>
 			<tbody>
-
+<?php
+	foreach ($fRanking as $items) {
+		$out=explode("|", $items);
+		echo "<tr><td>$out[0]</td><td>$out[1]</td><td>$out[2] $out[3]</td></tr>";
+	}
+	$mRanking=displayTableResults($currentRace, 'M');
+?>
 			</tbody>
 		</table>
-		<pre>
-<?php 
-$tvData=raceCatArray(); 
-$type='TenK';
-$gender='F';
-echo "$type ---- $gender\n";
-$ranking=array();
-foreach ($tvData[$type][$gender] as $entries) {
-	$tempdata = $entries;
-	foreach ($tempdata as $runnerinfo) {
-		$ranking[] = $runnerinfo[$type].','.$runnerinfo['FName'].','.$runnerinfo['LName'];
-//		echo $runnerinfo[$type].','.$runnerinfo['FName'].','.$runnerinfo['LName'];
-	}
-	sort($ranking);
-	foreach ($ranking as $runners) {
-		echo $runners . "\n";
-	}
-}
 
+		<table style="width: 450px; float: left; margin-left: 25px">
+			<thead>
+				<tr>
+					<td colspan="3"><?php echo $currentRace; ?> - Male</td>
+				</tr>
+				<tr>
+					<td>Time</td><td>Bib</td><td>Name</td>
+				</tr>
+			</thead>
+			<tbody>
+<?php
+	foreach ($mRanking as $items) {
+		$out=explode("|", $items);
+		echo "<tr><td>$out[0]</td><td>$out[1]</td><td>$out[2] $out[3]</td></tr>";
+	}
 ?>
-		</pre>
+			</tbody>
 	</body>
 </html>
+
+<?php
+}
+
+
+function displayTableResults($raceType, $gender) {
+	//if age=0, then this function will output all of the racers, regardless of age in one sorted variable.
+	//the output is: time | bib | first name | last name | Age
+	//sorted in order of time. 
+	$tvData = raceCatArray();
+	$ranking='';
+	foreach ($tvData[$raceType][$gender] as $age=>$value) {
+		foreach($value as $person) {
+			$ranking[]=$person[$raceType].'|'.$person['Bib'].'|'.$person['FName'].'|'.$person['LName'].'|'.$person['Age'];
+		}
+	}
+
+	sort($ranking);
+	return $ranking;
+}
