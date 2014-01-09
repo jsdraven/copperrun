@@ -131,17 +131,18 @@ function raceCatArray(){
     }
     return $raceListings;
 }
+
 function getRinfo($id){
     $items['fname'] = 'Jim';
     $items['bib'] = 110;
 
     return $items;
 }
+
 function rFeed($id=10){
 //here is where the the array will be built. I will also need to include a key for current place and its value.
     //first value in the array must be the racer's current place.
-    $info = array();
-
+    
 /*process list
 1) select * from db where ID is ID
 2) Test for possible place
@@ -150,44 +151,28 @@ function rFeed($id=10){
 4) I can do a while for gathering the other places and putting them into an arra.
 5) I will need to use another function for checking place wihtin the catigory and not just over all.
 */
+    $info = array();
     $sql = "SELECT * FROM runners WHERE id = $id";
     $result = DbConnection($sql);
-   /* $info['oPlace'] = 6;
-    $info['cPlace'] = 2;
+    
+    $result = mysqli_fetch_object($result);
+    var_dump($result->FName);
+    if (strlen($result->HalfMile) > 0) {
+        # code...
+        $field = 'HalfMile'.$result->Gender;
+    }elseif (strlen($result->TenK) > 0) {
+        # code...
+        $field = 'TenK'.$result->Gender;
+    }elseif (strlen($result->TwoMile) > 0) {
+        # code...
+        $field = 'TwoMile'.$result->Gender;
+    }
+    var_dump($field);
 
-    //below is a pre-built array for testing and place holding.
-    $info['0']['id'] = 1;
-    $info['0']['fname'] = "Tod";
-    $info['0']['bib'] = 123;
-    $info['0']['time'] = '1:00:01.23';
-    $info['0']['cPlace'] = 1;
-
-    $info['1']['id'] = 128;
-    $info['1']['fname'] = "Jim";
-    $info['1']['bib'] = 110;
-    $info['1']['time'] = '1:00:02.23';
-    $info['1']['cPlace'] = 2;
-
-    $info['2']['id'] = 115;
-    $info['2']['fname'] = "Tim";
-    $info['2']['bib'] = 124;
-    $info['2']['time'] = '1:00:10.23';
-    $info['2']['cPlace'] = 3;
-
-    $info['3']['id'] = 92;
-    $info['3']['fname'] = "Greg";
-    $info['3']['bib'] = 116;
-    $info['3']['time'] = '1:01:01.23';
-    $info['3']['cPlace'] = 4;
-
-    $info['4']['id'] = 12;
-    $info['4']['fname'] = "John";
-    $info['4']['bib'] = 128;
-    $info['4']['time'] = '1:16:01.23';
-    $info['4']['cPlace'] = 5;*/
-
-    return $info;
+    
 }
+
+
 function formProcessor($post, $form){
     /*$form is an array. We will have the key the field name and true or false if it is required. 
     We will need to have a standardization of field names if we are to fully check the data for the required content like name is all letters an age is number etc.
@@ -234,49 +219,5 @@ function formProcessor($post, $form){
         }
     }
     
-}
-function rSearchList($items){
-/*
-Process for this
-1) check for items in the items array
-2) if bib use it for certain one result
-3) select all with similar fname limit 5 to reduce loading time and clutter.
-4) build array id, fname, bib. Must also include original search fname for using with more list option. 
-*/
-//Jim is the name we used to test with targeted bib 110. cannot use 123, 124, 116, 128.
-    $list = array();
-
-    if (isset($items['bib'])) {
-        # code...
-        $list['bib']['source'] = 'runnerSearch';
-
-
-        $bib = $items['bib'];
-        $sql = "SELECT * FROM runners WHERE Bib = '$bib'"; 
-        $result = DbConnection($sql);
-        $object = mysqli_fetch_object($result);
-        $list['bib']['option'] = 'id='.$object->id;
-
-
-    }else{
-        
-        $fname = $items['fname'];
-        $sql = "SELECT * FROM runners WHERE FName LIKE '$fname'";
-        $result = DbConnection($sql);
-
-            $records = mysqli_num_rows($result);
-
-            for ($i=0; $i < $records; $i++) { 
-                # code...
-                $row = mysqli_fetch_assoc($result);
-                $list[] = $row;
-                mysqli_field_seek($result, $i);
-            }
-            mysqli_free_result($result);
-
-}
-
-
-return $list;
 }
 

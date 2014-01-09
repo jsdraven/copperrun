@@ -3,7 +3,7 @@
 if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
-
+$displayBody = '';
 $body .= "<h3>Runner Search</h3>";
 if (isset($_POST['bnumber'])) {
     # code...
@@ -13,16 +13,16 @@ if (isset($_POST['fname'])) {
     # code...
     $itemSet['fname'] = $_POST['fname'];
 }
-print_r($itemSet);
+var_dump($_POST);
+
 if (!isset($_POST['resultChoice']) && isset($itemSet)) {
         # code...
-        $results = rSearchList($itemSet);
-        print_r($results);
-        if (array_key_exists('bib', $results)) {
+        if ($itemSet['bib'] > 0) {
             # code...
-           $source = $results['bib']['source'];
-           $option = $results['bib']['option'];
-           $body .="
+            echo "lost in my own code";
+/*           $source = $itemSet['bib']['source'];
+           $option = $itemSet['bib']['option'];
+           $body .=<<<HTML
 $programingCredit
 
         <div id='myDiv'>One moment while I fetch your information.</div>
@@ -30,29 +30,19 @@ $programingCredit
                 <label>Search Again<input style='display: none;' type='submit' /></label>
                 </form>
 
-";
+HTML;*/
         }else{
+            var_dump($_POST);
 
-        $rows = "";
-        for ($i=0; $i < 5; $i++) {
-                $Fname = $results[$i]['fname'];
-                $bib = $results[$i]['bib'];
-                $ID = $results[$i]['id'];
-                $rows .= "<tr><td align='center'><label>$Fname - $bib <input type='submit' style='display: none;' name='resultChoice' value='$ID' /></label></td></tr>\n";
-        }
-        $body .=" 
-                <form action='' method='POST'>
-                <input type='hidden' name='Search' value='Search' />
-                        <table border='1'>
-
-                                <tr>
-                                        <td align='center'>
-                                                Select one please.
-                                        </td>
-                                </tr>
-                                $rows
-                        </table>
- ";
+            $rows = "";
+            $name = $itemSet['fname'];
+            $sql = "SELECT * FROM runners WHERE FName = '$name'";
+            $results = DbConnection($sql);
+            while ($row = mysqli_fetch_object($results)) {
+                # code...
+                $rows .= "<tr><td align='center'><label>$row->FName - $row->Bib <input type='submit' style='display: none;' name='resultChoice' value='$row->id' /></label></td></tr>\n";
+            }
+            $displayBody = "list";
 }
 }elseif (isset($_POST['resultChoice'])) {
         # here is were source is set
@@ -60,7 +50,7 @@ $programingCredit
         $source = 'runnerSearch';
         $option = 'id='.$resultChoice;
 
-                $body .="
+                $body .=<<<HTML
 $programingCredit
 
         <div id='myDiv'>One moment while I fetch your information.</div>
@@ -68,17 +58,23 @@ $programingCredit
                 <label>Search Again<input style='display: none;' type='submit' /></label>
                 </form>
 
-";
+HTML;
 }elseif (isset($_POST['Search']) && $_POST['Search'] == 'Lboard') {
     # code...
-    $body .="<div id='myDiv'>One moment while I fetch your information.</div>
+/*    $body .="<div id='myDiv'>One moment while I fetch your information.</div>
         <form action=''>
         <label>Back to Search<input type='submit' hidden='true' /></label>
         </form>
-    ";
+    ";*/
+    $displayBody = "list";
 }else {
         # code...
-        $body .="
+        $displayBody = "form";
+}
+
+switch($displayBody){
+    case "form":
+        $body .=<<<HTML
 $programingCredit
 
                 <form action='' method='POST'>
@@ -104,7 +100,28 @@ $programingCredit
                         </td>
                 </tr>
         </table>
+HTML;
+        break;
+    case "list":
+        
+        $body .=<<<HTML
+                <form action='' method='POST'>
+                <input type='hidden' name='Search' value='Search' />
+                        <table border='1'>
 
-";
+                                <tr>
+                                        <td align='center'>
+                                                Select one please.
+                                        </td>
+                                </tr>
+                                $rows
+                        </table>
+HTML;
+        break;
+
+    case "result":
+        $body .=<<<HTML
+
+HTML;
+        break;
 }
-
