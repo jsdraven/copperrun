@@ -16,7 +16,39 @@ define('dbUser', 'copperrun');
 define('dbPass', 'copperrun');
 define('dbHost', 'localhost');
 define('dbname', 'copperrun');
+function DbConnection($query){
 
+    $DB_User = constant('dbUser');
+    $DB_Password = constant('dbPass');
+    $DB_Host = constant('dbHost');
+    $DB_Name = constant('dbname');
+    $copperrun = mysqli_connect($DB_Host, $DB_User, $DB_Password, $DB_Name);
+    $result = mysqli_query($copperrun, $query);
+    if(!$result){
+        $end = "MySQL Failed to comply: ".mysqli_error($copperrun);
+    }else{
+        $end = $result;
+    }
+    mysqli_close($copperrun);
+    return $end;
+}
+
+function getRCnfo($bib){
+
+//this needs to be done after successful input
+
+   
+
+   
+    //fetch information on a single racer
+    $sql = "SELECT * FROM runners WHERE Bib = $bib";
+    $result = DbConnection($sql);
+    $result = mysqli_fetch_object($result);
+
+
+
+    
+}
 function listing ($filler){
     $filler_r = '';
     ksort($filler);
@@ -40,17 +72,7 @@ function listing ($filler){
     }
     return $filler_r;
 }
-function DbConnection($query){
 
-    $DB_User = constant('dbUser');
-    $DB_Password = constant('dbPass');
-    $DB_Host = constant('dbHost');
-    $DB_Name = constant('dbname');
-    $copperrun = mysqli_connect($DB_Host, $DB_User, $DB_Password, $DB_Name);
-    $result = mysqli_query($copperrun, $query);
-    mysqli_close($copperrun);
-    return $result;
-}
 function timeToSeconds ($time){
     list($hours, $mins, $secs) = explode(':', $time);
     $seconds = ($hours * 3600)+($mins * 60)+ $secs;
@@ -151,23 +173,8 @@ function rFeed($id=10){
 4) I can do a while for gathering the other places and putting them into an arra.
 5) I will need to use another function for checking place wihtin the catigory and not just over all.
 */
-    $info = array();
-    $sql = "SELECT * FROM runners WHERE id = $id";
-    $result = DbConnection($sql);
-    
-    $result = mysqli_fetch_object($result);
-    var_dump($result->FName);
-    if (strlen($result->HalfMile) > 0) {
-        # code...
-        $field = 'HalfMile'.$result->Gender;
-    }elseif (strlen($result->TenK) > 0) {
-        # code...
-        $field = 'TenK'.$result->Gender;
-    }elseif (strlen($result->TwoMile) > 0) {
-        # code...
-        $field = 'TwoMile'.$result->Gender;
-    }
-    var_dump($field);
+
+
 
     
 }

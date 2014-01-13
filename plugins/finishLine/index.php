@@ -2,6 +2,13 @@
 if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
+
+
+
+
+
+
+
 $half = '';
 $tenk = '';
 $two = '';
@@ -11,4 +18,9 @@ if (isset($form)) {
 	# code...
 	require 'form.php';
 }
+
+
+
+
+
 require 'view.php';

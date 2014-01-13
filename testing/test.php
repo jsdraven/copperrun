@@ -44,10 +44,10 @@ $sample->name->first = 'justin';
 $sample->name->last = 'scott';
 $sample->age = 32;
 $sample->raceInfo = $Stuff;
-$blob = addslashes(serialize($Stuff));
-var_dump($blob);
-/*
-var_dump($sample);
+$blob = serialize($Stuff);
+//var_dump($blob);
+
+/*var_dump($blob);
 
 
 $blob = base64_encode($blob);
@@ -62,10 +62,12 @@ var_dump($insert);
 $sql2 = "SELECT * FROM test WHERE name = 'Justin'";
 
 $result = DbConnection($sql2);
+var_dump($result);
+
 $something = mysqli_fetch_object($result);
 var_dump($something);
-$returnedObject = stripslashes($something->object);
+$returnedObject = base64_decode($something->object);
 var_dump($returnedObject);
 $returnedObject = unserialize($returnedObject);
 
-var_dump($returnedObject);
+var_dump($returnedObject->tenk->oPlace);
