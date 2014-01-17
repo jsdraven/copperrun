@@ -42,7 +42,6 @@ for ($i=1; $i < ($count+1) ; $i++) {
 			# code...
 			$place = 1;
 		}
-		$TenTwoHalf = "0_0:"$catID."_".$place.":0_0";
 		$sql1 = "UPDATE runners SET TenTwoHalf = $TenTwoHalf"
 	}
 
