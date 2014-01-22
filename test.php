@@ -29,9 +29,34 @@ SQL;
 	$result = DbConnection($select);
 $count = $result->num_rows;
 $runner = mysqli_fetch_object($result);
-/*$index = 0;
+$index = 0;
 $raceType = 'TenK';
+//End of static data used for triggering function.
 
+function catObject($string){
+
+	$allCat = new stdClass();
+	$allCat->ten = new stdClass();
+	$allCat->two = new stdClass();
+	$allCat->half = new stdClass();
+	
+	$explodid = explode(':', $string);
+	
+	$ten = explode('_', $explodid[0]);
+	$allCat->ten->cat = $ten[0];
+	$allCat->ten->place = $ten[1];
+
+	$two = explode('_', $explodid[1]);
+	$allCat->two->cat = $two[0];
+	$allCat->two->place = $two[1];
+
+	$half = explode('_', $explodid[2]);
+	$allCat->half->cat = $half[0];
+	$allCat->half->place = $half[1];
+
+	return $allCat;
+	
+}
 
 function raceCat($runner, $index, $raceType){
     
@@ -70,33 +95,9 @@ SQL;
 	return $items;
 	
 }
-*/
-function catObject($string){
-	$allCat = new stdClass();
-	$allCat->ten = new stdClass();
-	$allCat->two = new stdClass();
-	$allCat->half = new stdClass();
-	
-	$explodid = explode(':', $string);
-	
-	$ten = explode('_', $explodid[0]);
-	$allCat->ten->cat = $ten[0];
-	$allCat->ten->place = $ten[1];
 
-	$two = explode('_', $explodid[1]);
-	$allCat->two->cat = $two[0];
-	$allCat->two->place = $two[1];
 
-	$half = explode('_', $explodid[2]);
-	$allCat->half->cat = $half[0];
-	$allCat->half->place = $half[1];
 
-	return $allCat;
-	
-}
-/*
 $raceCatStuff = raceCat($runner, $index, $raceType);
-var_dump($raceCatStuff);*/
-$string = '2_1:3_6:4_1';
-$var = catObject($string);
-var_dump($var);
+var_dump($raceCatStuff);
+

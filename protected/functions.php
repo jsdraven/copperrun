@@ -73,14 +73,18 @@ function listing ($filler){
     return $filler_r;
 }
 
-function timeToSeconds ($time){
+
+//not using time for sorting will not need this any more
+/*function timeToSeconds ($time){
     list($hours, $mins, $secs) = explode(':', $time);
     $seconds = ($hours * 3600)+($mins * 60)+ $secs;
     return $seconds;
-}
+}*/
 
+
+//needs to be redone to support the new info 
 function publishListing ($filler, $type, $count){
-    $filler_r = "<table class=\"copperrun\">\n";
+/*    $filler_r = "<table class=\"copperrun\">\n";
     $yr = date('Y');
     switch($type){
         case 'halfmile':
@@ -104,7 +108,7 @@ function publishListing ($filler, $type, $count){
         $filler_r .= "<tr><td>$bib</td><td>$lname, $fname</td><td>$age</td><td>$gender</td><td>$time</td></tr>\n";
     }
     $filler_r .= "</table>\n";
-    return $filler_r;
+    return $filler_r;*/
 }
 function raceCatArray(){
     //i will create an array based on stored age ranges for each gender. $Array=>raceType=>Gender=>ageRange=>RacerList.
@@ -113,7 +117,11 @@ function raceCatArray(){
     $result1 = DbConnection($query1);
     //I need to stack each age range into sepporate arrays per race type/gender.
     //Knowing the race type I could search
-    $items = array();
+
+//All of this is no longer valid and needs rewriting.
+
+
+/*    $items = array();
     while ($row = mysqli_fetch_assoc($result1)) {
         # code...
         foreach ($row as $key => $value) {
@@ -151,15 +159,17 @@ function raceCatArray(){
             mysqli_free_result($result);  
         }            
     }
-    return $raceListings;
+    return $raceListings;*/
 }
 
-function getRinfo($id){
+
+//does this even have a purpus any more?
+/*function getRinfo($id){
     $items['fname'] = 'Jim';
     $items['bib'] = 110;
 
     return $items;
-}
+}*/
 
 function rFeed($id=10){
 //here is where the the array will be built. I will also need to include a key for current place and its value.
@@ -228,6 +238,8 @@ function rFeed($id=10){
     }
     
 }*/
+
+
 function catObject($string){
     $allCat = new stdClass();
     $allCat->ten = new stdClass();
@@ -236,16 +248,13 @@ function catObject($string){
     
     $explodid = explode(':', $string);
     
-    $ten = explode('_', $explodid[0]);
-    $allCat->ten->cat = $ten[0];
+    $allCat->ten->cat = $explodid[0];
     $allCat->ten->place = $ten[1];
 
-    $two = explode('_', $explodid[1]);
-    $allCat->two->cat = $two[0];
+    $allCat->two->cat = $explodid[1];
     $allCat->two->place = $two[1];
 
-    $half = explode('_', $explodid[2]);
-    $allCat->half->cat = $half[0];
+    $allCat->half->cat =  $explodid[2];
     $allCat->half->place = $half[1];
 
     return $allCat;
