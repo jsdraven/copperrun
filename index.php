@@ -52,7 +52,7 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- <link href="css/style.css" rel="stylesheet" type="text/css" media="all" /> -->
+        <link href="css/style.css?=0005" rel="stylesheet" type="text/css" media="all" />
         <script>
             function loadXMLDoc()
             {
