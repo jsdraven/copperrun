@@ -76,9 +76,27 @@ function catObject($string){
 	$allCat->ten = new stdClass();
 	$allCat->two = new stdClass();
 	$allCat->half = new stdClass();
+	
 	$explodid = explode(':', $string);
+	
+	$ten = explode('_', $explodid[0]);
+	$allCat->ten->cat = $ten[0];
+	$allCat->ten->place = $ten[1];
+
+	$two = explode('_', $explodid[1]);
+	$allCat->two->cat = $two[0];
+	$allCat->two->place = $two[1];
+
+	$half = explode('_', $explodid[2]);
+	$allCat->half->cat = $half[0];
+	$allCat->half->place = $half[1];
+
+	return $allCat;
 	
 }
 /*
 $raceCatStuff = raceCat($runner, $index, $raceType);
 var_dump($raceCatStuff);*/
+$string = '2_1:3_6:4_1';
+$var = catObject($string);
+var_dump($var);

@@ -228,6 +228,29 @@ function rFeed($id=10){
     }
     
 }*/
+function catObject($string){
+    $allCat = new stdClass();
+    $allCat->ten = new stdClass();
+    $allCat->two = new stdClass();
+    $allCat->half = new stdClass();
+    
+    $explodid = explode(':', $string);
+    
+    $ten = explode('_', $explodid[0]);
+    $allCat->ten->cat = $ten[0];
+    $allCat->ten->place = $ten[1];
+
+    $two = explode('_', $explodid[1]);
+    $allCat->two->cat = $two[0];
+    $allCat->two->place = $two[1];
+
+    $half = explode('_', $explodid[2]);
+    $allCat->half->cat = $half[0];
+    $allCat->half->place = $half[1];
+
+    return $allCat;
+    
+}
 
 function raceCat($runner, $index, $raceType){
     
