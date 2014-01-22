@@ -240,7 +240,45 @@ function rFeed($id=10){
 }*/
 
 
-function catObject($string){
+function setCat($id){
+    $catArray = array();
+    $sql =<<<SQL
+SELECT * FROM runners WHERE ID = $id
+SQL;
+$result = DbConnection($sql);
+$runner = mysqli_fetch_object($result)
+$year = date('Y');
+    for ($i=0; $i < 3; $i++) { 
+        # code...
+        switch ($i) {
+            case 0:
+                # code...
+                $catType = 'TenK';
+                break;
+            case 1:
+                # code...
+                $catType = 'TwoMile';
+                break;
+            case 2:
+                # code...
+                $catType = 'HalfMile';
+                break;
+        }
+        $field = $raceType.$runner->Gender;
+        $sql =<<<SQL
+        SELECT * FROM racecat WHERE $field > 0 AND $field < $runner->Age AND year = $year
+SQL;
+        $raceCatR = DbConnection($sql);
+        $recordID = $raceCatR->num_rows - 1;
+        $raceCatID = $raceCatR->data_seek($$recordID);
+        $catArray[$catType] = $raceCatID;
+
+    }
+    $string = $catArray['TenK'].':'.$catArray['TwoMile'].':'.$catArray['HalfMile'];
+    return $string;
+}
+
+function readCatObject($string){
     $allCat = new stdClass();
     $allCat->ten = new stdClass();
     $allCat->two = new stdClass();
@@ -260,6 +298,8 @@ function catObject($string){
     return $allCat;
     
 }
+
+
 
 function raceCat($runner, $index, $raceType){
     
