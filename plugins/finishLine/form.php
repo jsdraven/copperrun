@@ -23,29 +23,16 @@ switch ($option) {
 		break;
 }
 
-$raceType = $raceType.'OverAll';
+$raceTypeC = $raceType.'OverAll';
 $sql =<<<SQL
 UPDATE `copperrun`.`runners`
 SET
-`$raceType` = '$place',
+`$raceTypeC` = '$place',
 WHERE `Bib` = '$bib'
 
 SQL;
 
-if (DbConnection($sql)) {
-	# code...
-	$select =<<<SQL
-SELECT * FROM `runners` WHERE `Bib` = '$bib'
-SQL;
+$result = DbConnection($sql);
 
-	$result = DbConnection($select);
-	$runner = mysqli_fetch_object($result);
-	$raceCatNFO = $runner->TenTwoHalf;
 
-	if ($raceCatNFO[$index] != getRCnfo($bib, $index)) {
-		# code...
-		
-	}
-
-}
 $lastSubmit = "<p>Last input was bib $bib and their place is $place</p>";

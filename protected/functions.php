@@ -180,13 +180,14 @@ function rFeed($id=10){
 }
 
 
-function formProcessor($post, $form){
+/*function formProcessor($post, $form){
     /*$form is an array. We will have the key the field name and true or false if it is required. 
     We will need to have a standardization of field names if we are to fully check the data for the required content like name is all letters an age is number etc.
     This function will return an array with errors and items values clean and original? I think I may just translate the htmlspecialchars before human readable.
 
     */
     //set the arrays for output
+    /*
     $items = array();
     $errors = array();
 
@@ -226,5 +227,34 @@ function formProcessor($post, $form){
         }
     }
     
-}
+}*/
 
+function raceCat($runner, $index, $raceType){
+    
+    $catType = $raceType.$runner->Gender;
+    $sql =<<<SQL
+    SELECT * FROM racecat WHERE $runner->Age > $catType
+SQL;
+    $result = DbConnection($sql);
+    $list = mysqli_fetch_array();
+    $count = count($list) - 1;
+    $record = $list[$count];
+    $cat = $reord['id'];
+    switch ($index) {
+        case 0:
+            # code... Tenk
+            $tentwohalf = '$cat_%:%:%';
+            break;
+        case 1:
+            # code... Two Mile
+            $tentwohalf = '%:$cat_%:%';
+            break;
+        case 2:
+            # code... Half Mile
+            $tentwohalf = '%:%:$cat_%';
+            break; 
+    }
+    $sql1 =<<<SQL
+SELECT * FROM runners WHERE Gander=$runner->Gender AND 
+SQL;
+}

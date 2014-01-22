@@ -2,11 +2,11 @@
 if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
-$body .="
+$body .=<<<HTML
 <p>
 <form action='index.php' method='POST'>
-<label>Bib Number:<input type='number' name='bib' tabindex='1' autofocus/> </label>
-<label>Place Number: <input type='number' name='place' tabindex='2' /></label>
+<label>Bib Number:<input type='text' name='bib' tabindex='1' size='4' maxlength="3" autofocus/> </label>
+<label>Place Number: <input type='text' name='place' tabindex='2' size='4' maxlength='3' /></label>
 <br />
 <select name='race' tabindex='3'>
 	<option>
@@ -25,6 +25,7 @@ $body .="
 <input type='submit' name='fLine' value='Submit' tabindex='4' />
 <input type='hidden' name='form' value='finishLine'/>
 </form>
+
 $lastSubmit
 $error
-";
+HTML;
