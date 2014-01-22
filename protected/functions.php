@@ -255,6 +255,7 @@ SQL;
             break; 
     }
     $sql1 =<<<SQL
-SELECT * FROM runners WHERE Gander=$runner->Gender AND 
+SELECT * FROM runners WHERE TenTwoHalf LIKE '$tentwohalf' 
 SQL;
+
 }

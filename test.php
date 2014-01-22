@@ -21,33 +21,48 @@ function DbConnection($query){
     return $end;
 }
 
-$sql =<<<SQL
-SELECT * FROM racecat WHERE TenKF > 0
+//static data used for triggering function.
+	$select =<<<SQL
+SELECT * FROM `runners` WHERE `Bib` = '125'
 SQL;
 
-$result = DbConnection($sql);
-$resultArray = mysqli_fetch_assoc($result);
-$count = count($resultArray);
-$place = 1;
-$sample = 1;
-for ($i=1; $i < ($count+1) ; $i++) { 
-	# code...
-	$topAge = $resultArray[$i]['TenKF'];
-	$sql = "SELECT * FROM runners WHERE TenK > 0 AND Gender = 'F' AND Age < $topAge";
-	$runners = DbConnection($sql);
-	while ($runner = mysqli_fetch_object($$runners)) {
-		# code...
-		$catID = $i - 1;
-		if ($i != $sample) {
-			# code...
-			$place = 1;
-		}
-		$sql1 = "UPDATE runners SET TenTwoHalf = $TenTwoHalf"
-	}
+	$result = DbConnection($select);
+$count = $result->num_rows;
+$runner = mysqli_fetch_object($result);
+$index = 0;
+$raceType = 'TenK';
 
 
+function raceCat($runner, $index, $raceType){
+    
+    $catType = $raceType.$runner->Gender;
+    $sql =<<<SQL
+    SELECT * FROM racecat WHERE $runner->Age > $catType
+SQL;
+    $result = DbConnection($sql);
+    $count = $result->num_rows - 1;
+    $list = mysqli_fetch_array($result);
+    $record = $list[$count];
+    $cat = $reord['id'];
+    switch ($index) {
+        case 0:
+            # code... Tenk
+            $tentwohalf = '$cat_%:%:%';
+            break;
+        case 1:
+            # code... Two Mile
+            $tentwohalf = '%:$cat_%:%';
+            break;
+        case 2:
+            # code... Half Mile
+            $tentwohalf = '%:%:$cat_%';
+            break; 
+    }
+    $sql1 =<<<SQL
+SELECT * FROM runners WHERE TenTwoHalf LIKE '$tentwohalf' 
+SQL;
+	$items = DbConnection($sql);
+	
 }
-
-$raceList = explode(":", $sample);
-var_dump($raceList);
-
+$raceCatStuff = raceCat($runner, $index, $raceType);
+var_dump($runner->Age);
