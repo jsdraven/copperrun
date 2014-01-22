@@ -29,7 +29,7 @@ SQL;
 	$result = DbConnection($select);
 $count = $result->num_rows;
 $runner = mysqli_fetch_object($result);
-$index = 0;
+/*$index = 0;
 $raceType = 'TenK';
 
 
@@ -37,13 +37,15 @@ function raceCat($runner, $index, $raceType){
     
     $catType = $raceType.$runner->Gender;
     $sql =<<<SQL
-    SELECT * FROM racecat WHERE $runner->Age > $catType
+    SELECT * FROM racecat WHERE $catType > 0 AND $catType < $runner->Age
 SQL;
     $result = DbConnection($sql);
     $count = $result->num_rows - 1;
-    $list = mysqli_fetch_array($result);
+    //$list = mysqli_fetch_array($result);
+    $list = $result->data_seek($count);
+    var_dump($list);
     $record = $list[$count];
-    $cat = $reord['id'];
+    $cat = $record['id'];
     switch ($index) {
         case 0:
             # code... Tenk
@@ -62,7 +64,21 @@ SQL;
 SELECT * FROM runners WHERE TenTwoHalf LIKE '$tentwohalf' 
 SQL;
 	$items = DbConnection($sql);
+	$racerCount = $items->num_rows - 1;
+	$catPlace = $items->data_seek($racerCount);
+
+	return $items;
 	
 }
+*/
+function catObject($string){
+	$allCat = new stdClass();
+	$allCat->ten = new stdClass();
+	$allCat->two = new stdClass();
+	$allCat->half = new stdClass();
+	$explodid = explode(':', $string);
+	
+}
+/*
 $raceCatStuff = raceCat($runner, $index, $raceType);
-var_dump($runner->Age);
+var_dump($raceCatStuff);*/
