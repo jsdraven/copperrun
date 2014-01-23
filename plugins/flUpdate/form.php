@@ -9,12 +9,20 @@ switch ($option) {
 	case 'half':
 		# code...
 		$half = ' selected';
+		$race = 'HalfMile';
 		break;
 	case 'tenk':
 		$tenk = ' selected';
+		$race = 'TenK';
 		break;
 	case 'two':
 		# code...
 		$two = ' selected';
+		$race = 'TwoMile';
 		break;
 }
+$fieldOverAll = $race.'OverAll';
+$sql =<<<SQL
+UPDATE runners SET $race = $time WHERE $fieldOverAll = $place
+SQL;
+ 
