@@ -22,7 +22,7 @@ switch ($option) {
 		break;
 }
 $fieldOverAll = $race.'OverAll';
-$sql =<<<SQL
+$sql =<<<EOT
 UPDATE runners SET $race = $time WHERE $fieldOverAll = $place
-SQL;
+EOT;
  

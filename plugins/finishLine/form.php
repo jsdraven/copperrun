@@ -24,13 +24,13 @@ switch ($option) {
 }
 
 $raceTypeC = $raceType.'OverAll';
-$sql =<<<SQL
+$sql =<<<EOT
 UPDATE `copperrun`.`runners`
 SET
 `$raceTypeC` = '$place',
 WHERE `Bib` = '$bib'
 
-SQL;
+EOT;
 
 $result = DbConnection($sql);
 

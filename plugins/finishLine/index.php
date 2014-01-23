@@ -19,9 +19,9 @@ if (isset($form)) {
 	require 'form.php';
 	if (isset($result) && $result == TRUE) {
 	# code...
-	$select =<<<SQL
+	$select =<<<EOT
 SELECT * FROM `runners` WHERE `Bib` = '$bib'
-SQL;
+EOT;
 
 	//$result = DbConnection($select);
 
