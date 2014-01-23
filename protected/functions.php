@@ -241,6 +241,8 @@ function rFeed($id=10){
 
 
 function setCat($id){
+
+    //this creates a string to be stored within a runners record showing the race catigory ids they belong to under all race types for search ability and reporting.
     $catArray = array();
     $sql =<<<SQL
 SELECT * FROM runners WHERE ID = $id
@@ -278,23 +280,22 @@ SQL;
     return $string;
 }
 
-function readCatObject($string){
+function catObject($string){
+
+    //I am building the category object for a given runner based on the string returned in a query from the TenTwoHalf field.
+    //Below is a development of the object taking into account the futur adition of rank within the category.
     $allCat = new stdClass();
     $allCat->ten = new stdClass();
     $allCat->two = new stdClass();
     $allCat->half = new stdClass();
-    
+    //I am exploding the string into its race type parts. the name is also the given order of the race types in the array.
     $explodid = explode(':', $string);
-    
+    //$allCat->ten is a std class object. I am setting the value of cat (category) to the first record in the array.
     $allCat->ten->cat = $explodid[0];
-    $allCat->ten->place = $ten[1];
-
+    //$allCat->two is a std class object. I am setting the value of cat (category) to the first record in the array.
     $allCat->two->cat = $explodid[1];
-    $allCat->two->place = $two[1];
-
+    //$allCat->half is a std class object. I am setting the value of cat (category) to the first record in the array.
     $allCat->half->cat =  $explodid[2];
-    $allCat->half->place = $half[1];
-
     return $allCat;
     
 }
