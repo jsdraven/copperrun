@@ -12,5 +12,14 @@ $query =<<<SQL
 INSERT INTO runners (FName, LName, Gender, Age, Bib, Date, TenTwoHalf)
 VALUES ('$fname', '$lname', '$fm', '$age', '$bib', '$date', '0:0:0')
 SQL;
-DbConnection($query);
+$result = DbConnection($query);
+//after insert we will need to run another fuction to come up with the runners category.
+$id = $result->insert_id;
+$string = setCat($id);
+$sql =<<<SQL
+UPDATE runners SET TenTwoHalf = '$string' WHERE ID = $id
+SQL;
+
+DbConnection($sql);
+
 $lastSubmit = "Name: $fname $lname, Gender $fm, Age: $age, and Bib: $bib";
