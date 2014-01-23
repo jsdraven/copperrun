@@ -50,15 +50,15 @@ SQL;
     switch ($index) {
         case 0:
             # code... Tenk
-            $tentwohalf = '$cat_%:%:%';
+            $tentwohalf = '$cat:%:%';
             break;
         case 1:
             # code... Two Mile
-            $tentwohalf = '%:$cat_%:%';
+            $tentwohalf = '%:$cat:%';
             break;
         case 2:
             # code... Half Mile
-            $tentwohalf = '%:%:$cat_%';
+            $tentwohalf = '%:%:$cat';
             break; 
     }
     $sql1 =<<<SQL

@@ -248,7 +248,7 @@ function setCat($id){
 SELECT * FROM runners WHERE ID = $id
 SQL;
 $result = DbConnection($sql);
-$runner = mysqli_fetch_object($result)
+$runner = mysqli_fetch_object($result);
 $year = date('Y');
     for ($i=0; $i < 3; $i++) { 
         # code...

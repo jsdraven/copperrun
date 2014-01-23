@@ -2,7 +2,7 @@
 if (!isset($lock) || $lock != 'Key'){
     die("Not allowed back here!");
 }
-$body .="
+$body .=<<<HTML
 <p>
 <form action='index.php' method='POST'>
 <label>Place Number: <input type='number' name='place' tabindex='1' autofocus /></label>
@@ -27,4 +27,4 @@ $body .="
 </form>
 $lastSubmit
 $error
-";
+HTML;
