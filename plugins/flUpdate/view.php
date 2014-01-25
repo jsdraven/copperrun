@@ -5,8 +5,8 @@ if (!isset($lock) || $lock != 'Key'){
 $body .=<<<HTML
 <p>
 <form action='index.php' method='POST'>
-<label>Place Number: <input type='number' name='place' tabindex='1' autofocus /></label>
-<label>Time:<input type='number' name='bib' tabindex='2' /> </label>
+<label>Place Number: <input type='text' name='place' tabindex='1' autofocus /></label>
+<label>Time:<input type='text' name='time' tabindex='2' /> </label>
 <br />
 <select name='race' tabindex='3'>
 	<option>

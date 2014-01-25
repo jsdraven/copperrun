@@ -13,6 +13,7 @@ INSERT INTO runners (FName, LName, Gender, Age, Bib, Date, TenTwoHalf)
 VALUES ('$fname', '$lname', '$fm', '$age', '$bib', '$date', '0:0:0')
 EOT;
 $result = DbConnection($query);
+
 //after insert we will need to run another fuction to come up with the runners category.
 $getRunner =<<<EOT
 SELECT * FROM runners WHERE FName = '$fname' AND LName = '$lname' AND Bib = '$bib' AND Date = '$date'

@@ -1,0 +1,2 @@
+prepopulate place in finish line based on last entered
+one field for finish line update used dots only

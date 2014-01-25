@@ -21,8 +21,8 @@ switch ($option) {
 		$race = 'TwoMile';
 		break;
 }
+
 $fieldOverAll = $race.'OverAll';
-$sql =<<<EOT
-UPDATE runners SET $race = $time WHERE $fieldOverAll = $place
-EOT;
- 
+
+$sql ="UPDATE runners SET $race = '$time' WHERE $fieldOverAll = $place";
+$result = DbConnection($sql);

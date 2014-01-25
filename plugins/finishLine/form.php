@@ -25,14 +25,9 @@ switch ($option) {
 
 $raceTypeC = $raceType.'OverAll';
 $sql =<<<EOT
-UPDATE `copperrun`.`runners`
-SET
-`$raceTypeC` = '$place',
-WHERE `Bib` = '$bib'
-
+UPDATE `copperrun`.`runners` SET `$raceTypeC` = '$place' WHERE `Bib` = '$bib'
 EOT;
 
 $result = DbConnection($sql);
-
 
 $lastSubmit = "<p>Last input was bib $bib and their place is $place</p>";

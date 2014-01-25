@@ -6,7 +6,7 @@ if (!isset($lock) || $lock != 'Key'){
 }
 //var is set so to display credit on public sites.
 $programingCredit = "<h3>And programing is brought to you by<br /> Mother Lode Makers</h3>";
-
+date_default_timezone_set('America/Los_Angeles');
 /*
 **
 ** What we have here is a set of all functions. 
@@ -238,7 +238,7 @@ function setCat($runner){
     $catArray = array();
     
 
-$year = date('Y');
+$year = '2014';
     for ($i=0; $i < 3; $i++) { 
         # code...
         switch ($i) {

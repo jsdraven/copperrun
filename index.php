@@ -26,10 +26,19 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
         $path = "plugins/$form/index.php";
     }
     require $path;
-}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.10' || $_SERVER['REMOTE_ADDR'] == '192.168.200.23') {
+}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.24' || $_SERVER['REMOTE_ADDR'] == '192.168.200.11' || $_SERVER['REMOTE_ADDR'] == '192.168.200.23') {
     //data entry IP is the only other computer with access to data entry not controlling at all
-    require 'plugins/dataPanel/index.php';
+    require "plugins/adminPanel/index.php";
     $path = 'landing.php';
+    if (isset($choice)) {
+        # code...
+        $path = "plugins/$choice/index.php";
+    }
+    if (isset($_POST['report'])) {
+        # code...
+        $report = $_POST['report'];
+        $path = "reports/index.php";
+    }
     if (isset($_POST['form'])) {
         # code...
         $form = $_POST['form'];
