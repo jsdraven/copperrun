@@ -41,6 +41,7 @@ foreach ($raceGender as $gender) {
 
 ?>
 			</tbody>
+		</table>
 	</body>
 </html>
 

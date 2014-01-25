@@ -26,7 +26,7 @@ if ($_SERVER['REMOTE_ADDR'] == $_SERVER['SERVER_ADDR']){
         $path = "plugins/$form/index.php";
     }
     require $path;
-}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.10') {
+}elseif ($_SERVER['REMOTE_ADDR'] == '192.168.200.10' || $_SERVER['REMOTE_ADDR'] == '192.168.200.23') {
     //data entry IP is the only other computer with access to data entry not controlling at all
     require 'plugins/dataPanel/index.php';
     $path = 'landing.php';

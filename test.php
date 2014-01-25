@@ -25,6 +25,8 @@ function DbConnection($query){
 function raceCatArray(){
     //i will create an array based on stored age ranges for each gender. $Array=>raceType=>Gender=>ageRange=>RacerList.
     $year = date('Y');
+    $today = date("m/d/Y");
+    $races = array();
     $query1 = 'SELECT * FROM raceCat WHERE year = '.$year;
     $result1 = DbConnection($query1);
     //I need to stack each age range into sepporate arrays per race type/gender.
@@ -38,52 +40,74 @@ function raceCatArray(){
         # code...
         if (strlen($row->TenKF) > 0) {
             # code...
-            $items['TenK']['F'][$row->id] = array();
+            $items['TenK']['F'][] = $row->id;
         }elseif (strlen($row->TenKM) > 0) {
             # code...
-            $items['TenK']['M'][$row->id] = array();
+            $items['TenK']['M'][] = $row->id;
         }elseif (strlen($row->TwoMileF) > 0) {
             # code...
-            $items['TwoMile']['F'][$row->id] = array();
+            $items['TwoMile']['F'][] = $row->id;
         }elseif (strlen($row->TwoMileM) > 0) {
             # code...
-            $items['TwoMile']['M'][$row->id] = array();
+            $items['TwoMile']['M'][] = $row->id;
         }elseif (strlen($row->HalfMileF) > 0) {
             # code...
-            $items['HalfMile']['F'][$row->id] = array();
+            $items['HalfMile']['F'][] = $row->id;
         }elseif (strlen($row->HalfMileM) > 0) {
             # code...
-            $items['HalfMile']['M'][$row->id] = array();
+            $items['HalfMile']['M'][] = $row->id;
         }
     }
-var_dump($items);
-    /*$raceListings = array();
-    foreach ($items as $key => $part) {
+    $raceListings = array();
+    foreach ($items as $type => $genders) {
+        # code...
+        $races[$type] = array();
+        $oPlaceField = $type.'OverAll';
+        foreach ($genders as $gender => $catID) {
             # code...
-            $types = $key;
-        foreach ($part as $key => $value) {
-            # code...
-            $strCount = strlen($types) -1;
-            $typeParts = str_split($types, $strCount);
-            $type = $typeParts['0'];
-            $gender = $typeParts['1'];
-            $ageRange = explode('-', $value);
-            $ageStart = $ageRange['0'];
-            $ageStop = $ageRange['1'];
-            $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = '$gender' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
-            
-            $result = DbConnection($sql);
-            $records = mysqli_num_rows($result);
-            for ($i=0; $i < $records; $i++) { 
+            $races[$type][$gender] = array();
+            foreach ($catID as $id) {
                 # code...
-                $row = mysqli_fetch_assoc($result);
-                $raceListings[$type][$gender][$value][] = $row;
-                mysqli_field_seek($result, $i);
-            }
-            mysqli_free_result($result);  
-        }            
-    }*/
-    //return $raceListings;
-}
+                
+                $races[$type][$gender][$id] = array();
+                switch ($type) {
+                    case 'TenK':
+                        # code...
+                        $catField = $id.":%:%";
+                        break;
+                    case 'TwoMile':
+                        # code...
+                        $catField = '%:'.$id.':%';
+                        break;
+                    case 'HalfMile':
+                        # code...
+                        $catField = '%:%:'.$id;
+                }
+                $sql =<<<SQL
+SELECT * FROM runners WHERE Date = '$today' AND $oPlaceField > 0 AND TenTwoHalf LIKE '$catField'
+SQL;
+                $results = DbConnection($sql);
+                $races[$type][$gender][$id]['count'] = $results->num_rows;
+                var_dump($races[$type][$gender][$id]['count']);
+                $runners = mysqli_fetch_array($results);
+                if ($runners) {
+                    # code...
 
-raceCatArray();
+                    $races[$type][$gender][$id]['runners'][] = $runners;
+                }
+
+            }
+        }
+    }
+    return $races;
+}
+$id = 10;
+$sample = raceCatArray();
+var_dump($sample['TenK']['M'][$id]);
+
+for ($i=0; $i < $sample['TenK']['M'][$id]['count']; $i++) { 
+    # code...
+    //$sample;
+    var_dump($sample['TenK']['M'][$id]['runners'][$i]);
+
+}
