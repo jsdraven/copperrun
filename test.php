@@ -21,59 +21,49 @@ function DbConnection($query){
     return $end;
 }
 
-//static data used for triggering function.
-	$select =<<<SQL
-SELECT * FROM `runners` WHERE `Bib` = '125'
-SQL;
 
-	$result = DbConnection($select);
-$count = $result->num_rows;
-$runner = mysqli_fetch_object($result);
-$index = 0;
-$raceType = 'TenK';
-//End of static data used for triggering function.
+$runner = new stdClass;
+$runner->Gender = 'M';
+$runner->Age = 32;
 
 
-function raceCat($runner, $index, $raceType){
+
+function setCat($runner){
+
+    //this creates a string to be stored within a runners record showing the race catigory ids they belong to under all race types for search ability and reporting.
+    $catArray = array();
     
-    $catType = $raceType.$runner->Gender;
-    $sql =<<<SQL
-    SELECT * FROM racecat WHERE $catType > 0 AND $catType < $runner->Age
-SQL;
-    $result = DbConnection($sql);
-    $count = $result->num_rows - 1;
-    //$list = mysqli_fetch_array($result);
-    $list = $result->data_seek($count);
-    var_dump($list);
-    $record = $list[$count];
-    $cat = $record['id'];
-    switch ($index) {
-        case 0:
-            # code... Tenk
-            $tentwohalf = '$cat:%:%';
-            break;
-        case 1:
-            # code... Two Mile
-            $tentwohalf = '%:$cat:%';
-            break;
-        case 2:
-            # code... Half Mile
-            $tentwohalf = '%:%:$cat';
-            break; 
+
+$year = date('Y');
+    for ($i=0; $i < 3; $i++) { 
+        # code...
+        switch ($i) {
+            case 0:
+                # code...
+                $catType = 'TenK';
+                break;
+            case 1:
+                # code...
+                $catType = 'TwoMile';
+                break;
+            case 2:
+                # code...
+                $catType = 'HalfMile';
+                break;
+        }
+        $field = $catType.$runner->Gender;
+        $sql =<<<EOT
+SELECT * FROM racecat WHERE $field > 0 AND $field < $runner->Age AND year = $year
+EOT;
+        $raceCatR = DbConnection($sql);
+        $recordID = $raceCatR->num_rows - 1;
+        $sample = mysqli_fetch_object($raceCatR);
+        $raceCatR->data_seek($recordID);
+        $catArray[$catType] = $sample->id;
+
     }
-    $sql1 =<<<SQL
-SELECT * FROM runners WHERE TenTwoHalf LIKE '$tentwohalf' 
-SQL;
-	$items = DbConnection($sql);
-	$racerCount = $items->num_rows - 1;
-	$catPlace = $items->data_seek($racerCount);
-
-	return $items;
-	
+    $string = $catArray['TenK'].':'.$catArray['TwoMile'].':'.$catArray['HalfMile'];
+    return $string;
 }
-
-
-
-$raceCatStuff = raceCat($runner, $index, $raceType);
-var_dump($raceCatStuff);
-
+$result = setCat($runner);
+var_dump($result);

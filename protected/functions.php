@@ -269,8 +269,9 @@ SELECT * FROM racecat WHERE $field > 0 AND $field < $runner->Age AND year = $yea
 EOT;
         $raceCatR = DbConnection($sql);
         $recordID = $raceCatR->num_rows - 1;
-        $raceCatID = $raceCatR->data_seek($recordID);
-        $catArray[$catType] = $raceCatID;
+        $sample = mysqli_fetch_object($raceCatR);
+        $raceCatR->data_seek($recordID);
+        $catArray[$catType] = $sample->id;
 
     }
     $string = $catArray['TenK'].':'.$catArray['TwoMile'].':'.$catArray['HalfMile'];
