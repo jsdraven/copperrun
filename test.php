@@ -34,14 +34,26 @@ function raceCatArray(){
 
 
     $items = array();
-    while ($row = mysqli_fetch_assoc($result1)) {
+    while ($row = mysqli_fetch_object($result1)) {
         # code...
-        foreach ($row as $key => $value) {
+        if (strlen($row->TenKF) > 0) {
             # code...
-            if (strlen($value) > 0 && $key == 'id' && $key != 'year') {
-                # code...
-                $items[$key][] = $value;
-            }   
+            $items['TenK']['F'][$row->id] = array();
+        }elseif (strlen($row->TenKM) > 0) {
+            # code...
+            $items['TenK']['M'][$row->id] = array();
+        }elseif (strlen($row->TwoMileF) > 0) {
+            # code...
+            $items['TwoMile']['F'][$row->id] = array();
+        }elseif (strlen($row->TwoMileM) > 0) {
+            # code...
+            $items['TwoMile']['M'][$row->id] = array();
+        }elseif (strlen($row->HalfMileF) > 0) {
+            # code...
+            $items['HalfMile']['F'][$row->id] = array();
+        }elseif (strlen($row->HalfMileM) > 0) {
+            # code...
+            $items['HalfMile']['M'][$row->id] = array();
         }
     }
 var_dump($items);
