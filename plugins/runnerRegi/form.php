@@ -18,7 +18,7 @@ $getRunner =<<<EOT
 SELECT * FROM runners WHERE FName = '$fname' AND LName = '$lname' AND Bib = '$bib' AND Date = '$date'
 EOT;
 $gotRunner = DbConnection($getRunner);
-var_dump($gotRunner);
+
 $runner = mysqli_fetch_object($gotRunner);
 $string = setCat($runner);
 $sql =<<<EOT

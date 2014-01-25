@@ -162,15 +162,6 @@ function raceCatArray(){
     return $raceListings;*/
 }
 
-
-//does this even have a purpus any more?
-/*function getRinfo($id){
-    $items['fname'] = 'Jim';
-    $items['bib'] = 110;
-
-    return $items;
-}*/
-
 function rFeed($id=10){
 //here is where the the array will be built. I will also need to include a key for current place and its value.
     //first value in the array must be the racer's current place.
@@ -301,8 +292,9 @@ function catObject($string){
 
 
 function raceCat($runner, $index, $raceType){
-    
+    $Date = date("m/d/Y");
     $catType = $raceType.$runner->Gender;
+    $racePlace = 
     $sql =<<<EOT
     SELECT * FROM racecat WHERE $catType > 0 AND $catType < $runner->Age
 EOT;
@@ -316,19 +308,19 @@ EOT;
     switch ($index) {
         case 0:
             # code... Tenk
-            $tentwohalf = '$cat_%:%:%';
+            $tentwohalf = '$cat:%:%';
             break;
         case 1:
             # code... Two Mile
-            $tentwohalf = '%:$cat_%:%';
+            $tentwohalf = '%:$cat:%';
             break;
         case 2:
             # code... Half Mile
-            $tentwohalf = '%:%:$cat_%';
+            $tentwohalf = '%:%:$cat';
             break; 
     }
     $sql1 =<<<EOT
-SELECT * FROM runners WHERE TenTwoHalf LIKE '$tentwohalf' 
+SELECT * FROM runners WHERE TenTwoHalf LIKE '$tentwohalf' AND Date = $Date SORT BY 
 EOT;
     $grouping = DbConnection($sql1);
     if ($grouping->num_rows > 0) {

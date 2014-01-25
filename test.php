@@ -22,48 +22,56 @@ function DbConnection($query){
 }
 
 
-$runner = new stdClass;
-$runner->Gender = 'M';
-$runner->Age = 32;
+function raceCatArray(){
+    //i will create an array based on stored age ranges for each gender. $Array=>raceType=>Gender=>ageRange=>RacerList.
+    $year = date('Y');
+    $query1 = 'SELECT * FROM raceCat WHERE year = '.$year;
+    $result1 = DbConnection($query1);
+    //I need to stack each age range into sepporate arrays per race type/gender.
+    //Knowing the race type I could search
+
+//All of this is no longer valid and needs rewriting.
 
 
-
-function setCat($runner){
-
-    //this creates a string to be stored within a runners record showing the race catigory ids they belong to under all race types for search ability and reporting.
-    $catArray = array();
-    
-
-$year = date('Y');
-    for ($i=0; $i < 3; $i++) { 
+    $items = array();
+    while ($row = mysqli_fetch_assoc($result1)) {
         # code...
-        switch ($i) {
-            case 0:
+        foreach ($row as $key => $value) {
+            # code...
+            if (strlen($value) > 0 && $key == 'id' && $key != 'year') {
                 # code...
-                $catType = 'TenK';
-                break;
-            case 1:
-                # code...
-                $catType = 'TwoMile';
-                break;
-            case 2:
-                # code...
-                $catType = 'HalfMile';
-                break;
+                $items[$key][] = $value;
+            }   
         }
-        $field = $catType.$runner->Gender;
-        $sql =<<<EOT
-SELECT * FROM racecat WHERE $field > 0 AND $field < $runner->Age AND year = $year
-EOT;
-        $raceCatR = DbConnection($sql);
-        $recordID = $raceCatR->num_rows - 1;
-        $sample = mysqli_fetch_object($raceCatR);
-        $raceCatR->data_seek($recordID);
-        $catArray[$catType] = $sample->id;
-
     }
-    $string = $catArray['TenK'].':'.$catArray['TwoMile'].':'.$catArray['HalfMile'];
-    return $string;
+var_dump($items);
+    /*$raceListings = array();
+    foreach ($items as $key => $part) {
+            # code...
+            $types = $key;
+        foreach ($part as $key => $value) {
+            # code...
+            $strCount = strlen($types) -1;
+            $typeParts = str_split($types, $strCount);
+            $type = $typeParts['0'];
+            $gender = $typeParts['1'];
+            $ageRange = explode('-', $value);
+            $ageStart = $ageRange['0'];
+            $ageStop = $ageRange['1'];
+            $sql = "SELECT * FROM runners WHERE $type > 0 And Gender = '$gender' AND Age BETWEEN $ageStart AND $ageStop ORDER BY $type ASC";
+            
+            $result = DbConnection($sql);
+            $records = mysqli_num_rows($result);
+            for ($i=0; $i < $records; $i++) { 
+                # code...
+                $row = mysqli_fetch_assoc($result);
+                $raceListings[$type][$gender][$value][] = $row;
+                mysqli_field_seek($result, $i);
+            }
+            mysqli_free_result($result);  
+        }            
+    }*/
+    //return $raceListings;
 }
-$result = setCat($runner);
-var_dump($result);
+
+raceCatArray();
