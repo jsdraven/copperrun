@@ -9,9 +9,16 @@ if (!isset($lock) || $lock != 'Key'){
 	</header>
 	<body>
 <?php
+$curSeconds=date("s");
+$displayRace=2;
+if ($curSeconds < 21) {
+	$displayRace=0;
+} elseif ($curSeconds > 20 && $curSeconds < 41) {
+	$displayRace=1;
+}
 $races=array('TenK','TwoMile','HalfMile');
 
-foreach ($races as $currentRace) {
+$currentRace=$races[$displayRace];
 	$fRanking=displayTableResults($currentRace, 'F');
 
 ?>
@@ -56,7 +63,6 @@ foreach ($races as $currentRace) {
 </html>
 
 <?php
-}
 
 
 function displayTableResults($raceType, $gender) {
