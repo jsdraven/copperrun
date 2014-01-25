@@ -23,19 +23,21 @@ if (isset($form)) {
 SELECT * FROM `runners` WHERE `Bib` = '$bib'
 EOT;
 
-	//$result = DbConnection($select);
+	$result = DbConnection($select);
 
-/*on a successfull updatre to runner record for race finishline I want to add TenTwohalf option.
-I will need a function to find what race cat the runner is in. Then another to determin the place of the runner in that cat
+/*
+
 */
 
 	$runner = mysqli_fetch_object($result);
-	
-	raceCat($runner, $index, $raceType);
-	
-
+	$racePalce = $raceType.'OverAll';
+$sql =<<<EOF
+	UPDATE runners SET $racePalce = $place WHERE ID = $runner->id
+EOF;
 
 }
+$report = DbConnection($sql);
+var_dump($report);
 }
 
 

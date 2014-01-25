@@ -240,15 +240,12 @@ function rFeed($id=10){
 }*/
 
 
-function setCat($id){
+function setCat($runner){
 
     //this creates a string to be stored within a runners record showing the race catigory ids they belong to under all race types for search ability and reporting.
     $catArray = array();
-    $sql =<<<EOT
-SELECT * FROM runners WHERE ID = $id
-EOT;
-$result = DbConnection($sql);
-$runner = mysqli_fetch_object($result);
+    
+
 $year = date('Y');
     for ($i=0; $i < 3; $i++) { 
         # code...
@@ -266,7 +263,7 @@ $year = date('Y');
                 $catType = 'HalfMile';
                 break;
         }
-        $field = $raceType.$runner->Gender;
+        $field = $catType.$runner->Gender;
         $sql =<<<EOT
 SELECT * FROM racecat WHERE $field > 0 AND $field < $runner->Age AND year = $year
 EOT;
@@ -306,13 +303,15 @@ function raceCat($runner, $index, $raceType){
     
     $catType = $raceType.$runner->Gender;
     $sql =<<<EOT
-    SELECT * FROM racecat WHERE $runner->Age > $catType
+    SELECT * FROM racecat WHERE $catType > 0 AND $catType < $runner->Age
 EOT;
     $result = DbConnection($sql);
-    $list = mysqli_fetch_array();
-    $count = count($list) - 1;
-    $record = $list[$count];
-    $cat = $reord['id'];
+    $list = mysqli_fetch_object($result);
+    $count = $result->num_rows -1;
+   
+    $record = $result->data_seek($count);
+     
+    $cat = $list->id;
     switch ($index) {
         case 0:
             # code... Tenk
@@ -330,5 +329,9 @@ EOT;
     $sql1 =<<<EOT
 SELECT * FROM runners WHERE TenTwoHalf LIKE '$tentwohalf' 
 EOT;
-
+    $grouping = DbConnection($sql1);
+    if ($grouping->num_rows > 0) {
+        # code...
+       
+    }
 }
