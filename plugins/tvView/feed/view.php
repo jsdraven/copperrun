@@ -19,51 +19,33 @@ if ($curSeconds < 21) {
 $races=array('TenK','TwoMile','HalfMile');
 
 $currentRace=$races[$displayRace];
-	$fRanking=displayTableResults($currentRace, 'F');
+$raceGender=array("Male","Female");
+foreach ($raceGender as $gender) {
+
 
 ?>
-		<table style="width: 450px; float: left;">
+		<table style="width: 550px; float: left; margin: .5em">
 			<thead>
 				<tr>
-					<td colspan="3"><?php echo $currentRace; ?> - Female</td>
+					<td colspan="4"><?php echo $currentRace . ' - ' . $gender ?></td>
 				</tr>
 				<tr>
-					<td style="width: 80px;">Time</td><td style="width:70px">Bib</td><td>Name</td>
+					<td style="width: 30px;">Place:</td><td style="width: 90px">Time:</td>
+					<td style="width: 30px">Bib:</td><td>Name:</td>
 				</tr>
 			</thead>
 			<tbody>
 <?php
-	foreach ($fRanking as $items) {
-		$out=explode("|", $items);
-		echo "<tr><td>$out[0]</td><td>$out[1]</td><td>$out[2] $out[3]</td></tr>";
-	}
-	$mRanking=displayTableResults($currentRace, 'M');
-?>
-			</tbody>
-		</table>
 
-		<table style="width: 450px; float: left; margin-left: 25px">
-			<thead>
-				<tr>
-					<td colspan="3"><?php echo $currentRace; ?> - Male</td>
-				</tr>
-				<tr>
-					<td>Time</td><td>Bib</td><td>Name</td>
-				</tr>
-			</thead>
-			<tbody>
-<?php
-	foreach ($mRanking as $items) {
-		$out=explode("|", $items);
-		echo "<tr><td>$out[0]</td><td>$out[1]</td><td>$out[2] $out[3]</td></tr>";
-	}
+
+
 ?>
 			</tbody>
 	</body>
 </html>
 
 <?php
-
+}
 
 function displayTableResults($raceType, $gender) {
 	//if age=0, then this function will output all of the racers, regardless of age in one sorted variable.
